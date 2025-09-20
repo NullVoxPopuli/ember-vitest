@@ -146,6 +146,7 @@ export default defineConfig({
   // Add this config
   test: {
     include: ["tests/**/*-test.{gjs,gts}"],
+    maxConcurrency: 1,
     browser: {
       provider: "webdriverio",
       enabled: true,
