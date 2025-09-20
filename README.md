@@ -4,7 +4,6 @@ Ember<->Vitest integration
 
 - pause test execution for UI debugging purposes (and without pausing JS execution)
 - continue using familiar helpers as you would in qunit
--
 
 ## Install
 
