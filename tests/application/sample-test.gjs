@@ -10,17 +10,19 @@ class Router extends EmberRouter {
   rootUrl = '/';
 } 
 
+    class App extends Application {
+      modules = {
+        './router': Router,
+        './templates/application': <template>hello there</template>,
+      }
+    } 
+
 describe("Home", () => {
-  applicationTest.scoped({ app: class App extends Application {
-    modules = {
-      './router': Router,
-      './templates/application': <template>hello there</template>,
-    }
-  } });
+  applicationTest.scoped({ app: ({}, use) => use(App) });
 
-    applicationTest('can visit the home screen', async ({ env: { root } }) => {
-      await visit('/');
+  applicationTest('can visit the home screen', async ({ element, env }) => {
+    await visit('/');
 
-      expect(root.textContent).toBe('hello there');
-    });
+    expect(element.textContent).toBe('hello there');
+  });
 });

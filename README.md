@@ -69,6 +69,7 @@ describe("Rendering | Counter", () => {
 you may use `pauseTest` and `resumeTest` just as you would in qunit, but vitest does not allow changing the test timeout within a test, so when paused, you only have until your test timeout to debug.
 
 To get around this, you'll probably want to bump the testTimeout in the vite config to a few minutes.
+
 ```js
 export default defineConfig({
   test: {

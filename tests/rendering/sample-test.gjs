@@ -15,7 +15,7 @@ class Counter extends Component {
 }
 
 describe("Counter", () => {
-    renderingTest('can interact', async ({ task, env: { owner, root } }) => {
+    renderingTest('can interact', async () => {
         await render(
           <template>
             <Counter />
