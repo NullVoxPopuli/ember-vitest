@@ -98,7 +98,6 @@ you may use `pauseTest` and `resumeTest` just as you would in qunit, but vitest 
 
 To get around this, you'll probably want to bump the testTimeout in the vite config to a few minutes.
 
-
 ```js
 export default defineConfig({
   test: {
@@ -113,23 +112,23 @@ The test callback has some extra data available in it that you may find useful
 
 ```js
 `renderingTest|applicationTest|test`(
-    'name of your test here', 
-    ({ 
-        /**
+  "name of your test here",
+  ({
+    /**
             The element the component or application is rendered in to
         */
-        element,
-        /**
+    element,
+    /**
             The test context. This only has the owner
         */
-        context: { owner },
-        /**
+    context: { owner },
+    /**
             the env is where most of the test setup is interanally.
             the env.owner here is === context.owner, and the env.element is === element
         */
-        env: { owner, element, pauseTest },
-    }) => {
-})
+    env: { owner, element, pauseTest },
+  }) => {},
+);
 ```
 
 ## Setup

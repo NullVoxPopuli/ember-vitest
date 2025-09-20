@@ -20,6 +20,7 @@
   "module": "index.js",
   "scripts": {
     "lint": "prettier . --check",
+    "lint:fix": "prettier . --write",
     "test": "vitest run",
     "test:dev": "vitest"
   },
