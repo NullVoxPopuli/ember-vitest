@@ -1,0 +1,46 @@
+{
+  "name": "ember-vitest",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "integration for testing Ember with Vitest",
+  "main": "index.js",
+  "module": "index.js",
+  "exports": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "test:dev": "vitest"
+  },
+  "keywords": [
+    "ember",
+    "ember-addon",
+    "vite",
+    "vitest"
+  ],
+  "author": "NullVoxPopuli",
+  "license": "MIT",
+  "packageManager": "pnpm@10.17.0",
+  "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/plugin-transform-runtime": "^7.28.3",
+    "@ember/test-helpers": "^5.3.0",
+    "@embroider/core": "^4.2.0",
+    "@embroider/macros": "^1.18.1",
+    "@embroider/vite": "^1.2.0",
+    "@glimmer/component": "^2.0.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@vitest/browser": "^3.2.4",
+    "babel-plugin-ember-template-compilation": "^3.0.1",
+    "decorator-transforms": "^2.3.0",
+    "ember-source": "^6.7.0",
+    "prettier": "^3.6.2",
+    "vite": "^7.1.6",
+    "vitest": "^3.2.4"
+  },
+  "ember-addon": {
+    "version": 2,
+    "type": "addon"
+  },
+  "peerDependencies": {
+    "vitest": "^3.2.4"
+  }
+}

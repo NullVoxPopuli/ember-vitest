@@ -1,0 +1,7 @@
+minimumReleaseAge: 1440
+ignoreScripts: true
+
+peersSuffixMaxLength: 40
+autoInstallPeers: false
+dedupeInjectedDeps: true
+dedupePeerDependents: true
