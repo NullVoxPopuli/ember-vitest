@@ -1,28 +1,27 @@
-import { buildMacros } from '@embroider/macros/babel';
+import { buildMacros } from "@embroider/macros/babel";
 
 const macros = buildMacros();
 
-module.exports = {
+export default {
   plugins: [
     [
-      'babel-plugin-ember-template-compilation',
+      "babel-plugin-ember-template-compilation",
       {
-        compilerPath: 'ember-source/dist/ember-template-compiler.js',
-        enableLegacyModules: [
-        ],
+        compilerPath: "ember-source/dist/ember-template-compiler.js",
+        enableLegacyModules: [],
         transforms: [...macros.templateMacros],
       },
     ],
     [
-      'module:decorator-transforms',
+      "module:decorator-transforms",
       {
         runtime: {
-          import: import.meta.resolve('decorator-transforms/runtime-esm'),
+          import: import.meta.resolve("decorator-transforms/runtime-esm"),
         },
       },
     ],
     [
-      '@babel/plugin-transform-runtime',
+      "@babel/plugin-transform-runtime",
       {
         absoluteRuntime: import.meta.dirname,
         useESModules: true,

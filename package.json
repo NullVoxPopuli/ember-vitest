@@ -28,19 +28,28 @@
     "@embroider/vite": "^1.2.0",
     "@glimmer/component": "^2.0.0",
     "@rollup/plugin-babel": "^6.0.4",
+    "@testing-library/dom": "^10.4.1",
     "@vitest/browser": "^3.2.4",
     "babel-plugin-ember-template-compilation": "^3.0.1",
     "decorator-transforms": "^2.3.0",
     "ember-source": "^6.7.0",
     "prettier": "^3.6.2",
     "vite": "^7.1.6",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "webdriverio": "^9.19.2"
   },
   "ember-addon": {
     "version": 2,
-    "type": "addon"
+    "type": "addon",
+    "main": "./ember-addon-main.cjs"
   },
   "peerDependencies": {
     "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": "^20.11.0 || ^22 || >=24"
+  },
+  "dependencies": {
+    "ember-strict-application-resolver": "^0.1.0"
   }
 }

@@ -1,25 +1,28 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
-import { ember, extensions } from '@embroider/vite';
-import { babel } from '@rollup/plugin-babel';
+import { ember, extensions } from "@embroider/vite";
+import { babel } from "@rollup/plugin-babel";
 
 export default defineConfig({
   test: {
-    include: ['tests/**/*-test.*'],
+    include: ["tests/**/*-test.{gjs,gts}"],
     browser: {
-      provider: 'webdriverio',
+      provider: "webdriverio",
       enabled: true,
       // at least one instance is required
       instances: [
-        { browser: 'chromium' },
+        { browser: "chrome" },
+        // { browser: 'firefox' },
+        // { browser: 'edge' },
+        // { browser: 'safari' },
       ],
     },
   },
   plugins: [
     ember(),
     babel({
-      babelHelpers: 'runtime',
+      babelHelpers: "runtime",
       extensions,
-    })
-  ]
+    }),
+  ],
 });
