@@ -21,7 +21,7 @@
   "scripts": {
     "lint": "prettier . --check",
     "lint:fix": "prettier . --write",
-    "test": "vitest run",
+    "test": "vitest run --browser.headless",
     "test:dev": "vitest"
   },
   "dependencies": {
