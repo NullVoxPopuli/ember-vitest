@@ -19,6 +19,31 @@ class App extends Application {
 
 const waitForSettled = true;
 const options = { waitForSettled };
+
+export const test = baseTest.extend({
+  app: ({}, use) => use(App),
+  element: ({}, use) => use(document.createElement("div")),
+  context: ({}, use) => use({}),
+  env: [
+    async ({ app, element, context }, use) => {
+      document.body.append(element);
+
+      setApplication(app.create({ autoboot: false, rootElement: element }));
+      await setupContext(context, options);
+
+      await use({
+        owner: context.owner,
+        element,
+        pauseTest,
+      });
+
+      await teardownContext(context, options);
+      element.remove();
+    },
+    { auto: true },
+  ],
+});
+
 export const renderingTest = baseTest.extend({
   app: ({}, use) => use(App),
   element: ({}, use) => use(document.createElement("div")),

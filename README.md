@@ -24,45 +24,74 @@ npm exec vitest
 
 ### Application Tests
 
+These tests are generally for when you visit specific pages and simulate user flows.
+
 ```gjs
 // tests/application/sample-test.gjs
+import { describe, it, expect } from "vitest";
+import { applicationTest } from "ember-vitest";
+import { visit, pauseTest } from "@ember/test-helpers";
 
-import { describe, it, expect } from 'vitest';
-import { setupApplicationTest } from 'ember-vitest';
-import { visit, pauseTest } from '@ember/test-helpers';
+import App from "./your/app/location";
 
-describe("Application | Home", () => {
-    it('can visit the home screen', async () => {
-        await visit('/');
+describe("Home", () => {
+  applicationTest.scoped({ app: ({}, use) => use(App) });
 
-        // Uncomment to debug the app without pausing JS
-        // await pauseTest();
+  applicationTest("can visit the home screen", async ({ element }) => {
+    await visit("/");
 
-    });
+    expect(element.textContent).toBe("hello there");
+  });
 });
 ```
 
 ### Rendering Tests
 
+These sorts of tests are very versatile, as they enable you to test not just components, but reactivity, DOM, modifiers, and more!
+
 ```gjs
-import { describe, it, expect } from 'vitest';
-import { setupRenderingTest } from 'ember-vitest';
-import { visit, pauseTest } from '@ember/test-helpers';
+import { describe, it, expect } from "vitest";
+import { renderingTest } from "ember-vitest";
+import { find, click, render } from "@ember/test-helpers";
 
-class Conter
+import { Counter } from "#src/components/counter";
 
-describe("Rendering | Counter", () => {
-    it('can interact', async () => {
-        await visit('/');
+describe("Counter", () => {
+  // Optional: only needed if your component needs access to application state
+  // renderingTest.scoped({ app: ({}, use) => use(App) });
 
-        // Uncomment to debug the app without pausing JS
-        // await pauseTest();
+  renderingTest("can interact", async () => {
+    await render(<template><Counter /></template>);
 
-    });
+    expect(find("output").textContent).toBe("0");
+
+    await click("button");
+
+    expect(find("output").textContent).toBe("1");
+  });
 });
 ```
 
 ### Container Tests
+
+These tests are sort of like unit tests, but when you need your application owner present.
+
+```gjs
+import { describe, it, expect } from "vitest";
+import { test } from "ember-vitest";
+
+describe("Container test", () => {
+  test.scoped({ app: ({}, use) => use(App) });
+
+  test("can interact", async ({ context }) => {
+    let foo = context.owner.lookup("service:foo");
+
+    expect(foo.count).toBe(0);
+    foo.count++;
+    expect(foo.count).toBe(1);
+  });
+});
+```
 
 ### Pausing Test Execution
 
