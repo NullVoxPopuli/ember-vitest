@@ -1,25 +1,32 @@
 {
   "name": "ember-vitest",
   "version": "0.0.1",
-  "type": "module",
   "description": "integration for testing Ember with Vitest",
-  "main": "index.js",
-  "module": "index.js",
-  "exports": "index.js",
-  "scripts": {
-    "lint": "prettier . --check",
-    "test": "vitest run",
-    "test:dev": "vitest"
-  },
   "keywords": [
     "ember",
     "ember-addon",
     "vite",
     "vitest"
   ],
-  "author": "NullVoxPopuli",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:NullVoxPopuli/ember-vitest.git"
+  },
   "license": "MIT",
-  "packageManager": "pnpm@10.17.0",
+  "author": "NullVoxPopuli",
+  "type": "module",
+  "exports": "index.js",
+  "main": "index.js",
+  "module": "index.js",
+  "scripts": {
+    "lint": "prettier . --check",
+    "lint:fix": "prettier . --write",
+    "test": "vitest run --browser.headless",
+    "test:dev": "vitest"
+  },
+  "dependencies": {
+    "ember-strict-application-resolver": "^0.1.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.28.4",
     "@babel/plugin-transform-runtime": "^7.28.3",
@@ -36,22 +43,21 @@
     "ember-source": "^6.7.0",
     "prettier": "^3.6.2",
     "prettier-plugin-ember-template-tag": "^2.1.0",
+    "release-plan": "^0.17.0",
     "vite": "^7.1.6",
     "vitest": "^3.2.4",
     "webdriverio": "^9.19.2"
+  },
+  "peerDependencies": {
+    "vitest": "^3.2.4"
+  },
+  "packageManager": "pnpm@10.17.0",
+  "engines": {
+    "node": "^20.11.0 || ^22 || >=24"
   },
   "ember-addon": {
     "version": 2,
     "type": "addon",
     "main": "./ember-addon-main.cjs"
-  },
-  "peerDependencies": {
-    "vitest": "^3.2.4"
-  },
-  "engines": {
-    "node": "^20.11.0 || ^22 || >=24"
-  },
-  "dependencies": {
-    "ember-strict-application-resolver": "^0.1.0"
   }
 }
