@@ -4,6 +4,7 @@ const macros = buildMacros();
 
 export default {
   plugins: [
+    ["@babel/plugin-syntax-explicit-resource-management"],
     [
       "babel-plugin-ember-template-compilation",
       {

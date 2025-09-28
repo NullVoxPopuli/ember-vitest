@@ -8,7 +8,6 @@ export default defineConfig({
     include: ["tests/**/*-test.{gjs,gts}"],
     maxConcurrency: 1,
     browser: {
-      provider: "webdriverio",
       enabled: true,
       // at least one instance is required
       instances: [
