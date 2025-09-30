@@ -2,13 +2,14 @@
 
 Ember<->Vitest integration
 
+- browser testing is first class
 - pause test execution for UI debugging purposes (and without pausing JS execution)
 - continue using familiar helpers as you would in qunit
 
 ## Install
 
 ```
-npm add --save-dev ember-vitest vitest  @vitest/browser webdriverio
+npm add --save-dev ember-vitest vitest @vitest/browser
 ```
 
 ## Usage
@@ -21,7 +22,84 @@ pnpm vitest
 npm exec vitest
 ```
 
-### Application Tests
+### Using vitest's `test`
+
+> [!NOTE]
+> We use [`expect.soft`](https://vitest.dev/api/expect.html#soft) for better ergonomics in test reporting so when a test starts failing we can get the whole picture of the test at once, rather than have to address one failure at a time.
+
+#### Rendering Tests
+
+A basic test can be written like:
+
+```gjs
+import { describe, test, expect as hardExpect } from "vitest";
+import { setupRenderingContext } from "ember-vitest";
+
+const expect = hardExpect.soft;
+
+describe("example", () => {
+  test("it works", async () => {
+    using ctx = setupRenderingContext();
+
+    await ctx.render(<template>hello there</template>);
+
+    expect(ctx.element.textContent).contains("hello there");
+  });
+```
+
+And interactivity can be done via [`@testing-library/dom`](https://testing-library.com/docs/queries/about) and [`testing-library-ember`](https://github.com/nullvoxpopuli/testing-library-ember/) (which provides settled-state integration with testing-library's `fireEvent` utility, so you don't have to even "wait" or check for things in a loop. This cleans up tests significantly when async rendering is involved.)
+
+```gjs
+import { trackedObject } from "@ember/reactive/collections";
+import { describe, test, expect as hardExpect } from "vitest";
+import { screen } from "@testing-library/dom";
+import { fireEvent } from "testing-library-ember";
+
+import { setupRenderingContext } from "ember-vitest";
+
+const expect = hardExpect.soft;
+
+describe("example", () => {
+  test("has interactivity", async () => {
+    using ctx = setupRenderingContext();
+
+    const state = trackedObject({ value: 0 });
+    const increment = () => state.value++;
+
+    await ctx.render(
+      <template>
+        <button role="button" onclick={{increment}}>click me</button>
+        <output>{{state.value}}</output>
+      </template>,
+    );
+
+    let btn = screen.getByText(/click me/);
+    let out = ctx.element.querySelector("output");
+
+    expect(btn).toBeTruthy();
+    expect(out.textContent).toBe("0");
+
+    await fireEvent.click(btn);
+    expect(out.textContent).toBe("1");
+  });
+});
+```
+
+The returned `ctx` from the `setupRenderingContext` has the following APIs:
+
+- `element`
+- `owner`
+- `find(selector)`
+- `findAll(selector)`
+- `click(selector or element)`
+- `render(componet)`
+
+### Using extended `test`
+
+> [!NOTE]
+> These utilities are an experiment and will not be covered un semver, and unfortunately, use of these utilities prevents the ability to run tests in parallel (this is a limitation of `@ember/test-helpers`'s `setApplication`)
+
+#### Application Tests
 
 These tests are generally for when you visit specific pages and simulate user flows.
 
@@ -44,7 +122,7 @@ describe("Home", () => {
 });
 ```
 
-### Rendering Tests
+#### Rendering Tests
 
 These sorts of tests are very versatile, as they enable you to test not just components, but reactivity, DOM, modifiers, and more!
 
@@ -71,7 +149,7 @@ describe("Counter", () => {
 });
 ```
 
-### Container Tests
+#### Container Tests
 
 These tests are sort of like unit tests, but when you need your application owner present.
 
