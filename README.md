@@ -2,6 +2,7 @@
 
 Ember<->Vitest integration
 
+- browser testing is first class
 - pause test execution for UI debugging purposes (and without pausing JS execution)
 - continue using familiar helpers as you would in qunit
 
@@ -83,7 +84,20 @@ describe('example', () => {
 });
 ```
 
+
+The returned `ctx` from the `setupRenderingContext` has the following APIs:
+- `element`
+- `owner`
+- `find(selector)`
+- `findAll(selector)`
+- `click(selector or element)`
+- `render(componet)`
+
+
 ### Using extended `test`
+
+> [!NOTE]
+> These utilities are an experiment and will not be covered un semver, and unfortunately, use of these utilities prevents the ability to run tests in parallel (this is a limitation of `@ember/test-helpers`'s `setApplication`)
 
 #### Application Tests
 

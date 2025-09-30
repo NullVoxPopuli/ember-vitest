@@ -1,6 +1,12 @@
 import { getOwner } from "@ember/owner";
-import { settled } from "@ember/test-helpers";
+import { settled, click } from "@ember/test-helpers";
+import {
+  setupContext as emberSetupContext,
+  teardownContext,
+  setApplication,
+} from "@ember/test-helpers";
 import { renderComponent } from "@ember/renderer";
+import { create as createApp } from "./create-app.js";
 
 export function setupContext() {
   let element = document.createElement("div");
@@ -19,48 +25,53 @@ export function setupContext() {
     },
   };
 }
-export function setupRenderingContext() {
+
+export async function setupRenderingContext(app) {
   let element = document.createElement("div");
   document.body.append(element);
 
   let renders = [];
-  let apps = [];
-  let defaultOwner = {
-    lookup(locator) {
-      throw new Error(
-        `Will not find ${locator}. You will need to pass an app or owner to render()`,
-      );
-    },
-  };
+  let ctx = {};
+  let created = createApp(app, element);
+
+  setApplication(created);
+
+  await emberSetupContext(ctx);
 
   return {
     element,
     get owner() {
-      return null;
+      return ctx.owner;
     },
-    async render(component, options) {
-      let { app, owner: userOwner } = options ?? {};
-      let owner = userOwner ?? defaultOwner;
+    find(selector) {
+      return element.querySelector(selector);
+    },
+    findAll(selector) {
+      return element.querySelectorAll(selector);
+    },
+    click(target) {
+      let found = target instanceof Element ? target : this.find(target);
 
-      if (app) {
-        let instance = app.create({ autoboot: false, element });
-        apps.push(instance);
+      return click(found);
+    },
+    async render(component) {
+      let result = await renderComponent(component, {
+        into: element,
+        owner: ctx.owner,
+      });
 
-        owner = getOwner(instance);
-      }
-
-      renderComponent(component, { into: element, owner });
+      renders.push(result);
       await settled();
     },
     async [Symbol.dispose]() {
       renders.forEach((r) => r.destroy());
-      apps.forEach((r) => r.destroy());
+      teardownContext(ctx);
       element.remove();
     },
     async [Symbol.asyncDispose]() {
       renders.forEach((r) => r.destroy());
       await settled();
-      apps.forEach((r) => r.destroy());
+      teardownContext(ctx);
       await settled();
       element.remove();
     },

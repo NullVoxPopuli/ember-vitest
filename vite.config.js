@@ -9,6 +9,7 @@ export default defineConfig({
     maxConcurrency: 1,
     browser: {
       enabled: true,
+      provider: "webdriverio",
       // at least one instance is required
       instances: [
         { browser: "chrome" },
