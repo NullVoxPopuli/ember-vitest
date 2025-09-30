@@ -30,6 +30,7 @@ npm exec vitest
 #### Rendering Tests
 
 A basic test can be written like:
+
 ```gjs
 import { describe, test, expect as hardExpect } from "vitest";
 import { setupRenderingContext } from "ember-vitest";
@@ -58,7 +59,7 @@ import { setupRenderingContext } from "ember-vitest";
 
 const expect = hardExpect.soft;
 
-describe('example', () => {
+describe("example", () => {
   test("has interactivity", async () => {
     using ctx = setupRenderingContext();
 
@@ -84,15 +85,14 @@ describe('example', () => {
 });
 ```
 
-
 The returned `ctx` from the `setupRenderingContext` has the following APIs:
+
 - `element`
 - `owner`
 - `find(selector)`
 - `findAll(selector)`
 - `click(selector or element)`
 - `render(componet)`
-
 
 ### Using extended `test`
 
