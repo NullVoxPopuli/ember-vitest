@@ -39,7 +39,7 @@ const expect = hardExpect.soft;
 
 describe("example", () => {
   test("it works", async () => {
-    using ctx = setupRenderingContext();
+    await using ctx = setupRenderingContext();
 
     await ctx.render(<template>hello there</template>);
 
@@ -61,7 +61,7 @@ const expect = hardExpect.soft;
 
 describe("example", () => {
   test("has interactivity", async () => {
-    using ctx = setupRenderingContext();
+    await using ctx = setupRenderingContext();
 
     const state = trackedObject({ value: 0 });
     const increment = () => state.value++;
