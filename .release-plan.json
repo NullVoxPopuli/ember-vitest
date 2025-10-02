@@ -1,22 +1,18 @@
 {
   "solution": {
     "ember-vitest": {
-      "impact": "minor",
-      "oldVersion": "0.0.1",
-      "newVersion": "0.1.0",
+      "impact": "patch",
+      "oldVersion": "0.1.0",
+      "newVersion": "0.1.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
-        {
           "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
+          "reason": "Appears in changelog section :memo: Documentation"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-09-30)\n\n* ember-vitest 0.1.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-vitest`\n  * [#4](https://github.com/NullVoxPopuli/ember-vitest/pull/4) This looks kinda nice ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* `ember-vitest`\n  * [#1](https://github.com/NullVoxPopuli/ember-vitest/pull/1) Release plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-10-02)\n\n* ember-vitest 0.1.1 (patch)\n\n#### :memo: Documentation\n* `ember-vitest`\n  * [#5](https://github.com/NullVoxPopuli/ember-vitest/pull/5) Update context setup to `await using`? ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
 }
