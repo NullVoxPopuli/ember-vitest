@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-11-13)
+
+* ember-vitest 0.2.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-vitest`
+  * [#7](https://github.com/NullVoxPopuli/ember-vitest/pull/7) Upgrade vitest to v4 ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## Release (2025-10-02)
 
 * ember-vitest 0.1.1 (patch)
