@@ -1,3 +1,4 @@
+import { webdriverio } from "@vitest/browser-webdriverio";
 import { defineConfig } from "vite";
 
 import { ember, extensions } from "@embroider/vite";
@@ -9,7 +10,7 @@ export default defineConfig({
     maxConcurrency: 1,
     browser: {
       enabled: true,
-      provider: "webdriverio",
+      provider: webdriverio(),
       // at least one instance is required
       instances: [
         { browser: "chrome" },
