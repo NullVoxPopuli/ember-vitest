@@ -9,7 +9,7 @@ Ember<->Vitest integration
 ## Install
 
 ```
-npm add --save-dev ember-vitest vitest @vitest/browser
+npm add --save-dev ember-vitest vitest @vitest/browser @vitest/browser-webdriverio
 ```
 
 ## Usage
@@ -215,6 +215,7 @@ In order to use ember-vitest, you must have a vite config with plugins configure
 
 ```js
 // vite.config.js
+import { webdriverio } from "@vitest/browser-webdriverio";
 import { defineConfig } from "vite";
 
 import { ember, extensions } from "@embroider/vite";
@@ -226,7 +227,7 @@ export default defineConfig({
     include: ["tests/**/*-test.{gjs,gts}"],
     maxConcurrency: 1,
     browser: {
-      provider: "webdriverio",
+      provider: webdriverio(),
       enabled: true,
       headless: true,
       // at least one instance is required
