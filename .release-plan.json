@@ -1,18 +1,18 @@
 {
   "solution": {
     "ember-vitest": {
-      "impact": "patch",
-      "oldVersion": "0.1.0",
-      "newVersion": "0.1.1",
+      "impact": "minor",
+      "oldVersion": "0.1.1",
+      "newVersion": "0.2.0",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :memo: Documentation"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-10-02)\n\n* ember-vitest 0.1.1 (patch)\n\n#### :memo: Documentation\n* `ember-vitest`\n  * [#5](https://github.com/NullVoxPopuli/ember-vitest/pull/5) Update context setup to `await using`? ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
+  "description": "## Release (2025-11-13)\n\n* ember-vitest 0.2.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-vitest`\n  * [#7](https://github.com/NullVoxPopuli/ember-vitest/pull/7) Upgrade vitest to v4 ([@SergeAstapov](https://github.com/SergeAstapov))\n\n#### Committers: 1\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n"
 }
