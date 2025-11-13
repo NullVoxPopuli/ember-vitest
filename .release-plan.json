@@ -1,18 +1,18 @@
 {
   "solution": {
     "ember-vitest": {
-      "impact": "minor",
-      "oldVersion": "0.1.1",
-      "newVersion": "0.2.0",
+      "impact": "patch",
+      "oldVersion": "0.2.0",
+      "newVersion": "0.2.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-11-13)\n\n* ember-vitest 0.2.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-vitest`\n  * [#7](https://github.com/NullVoxPopuli/ember-vitest/pull/7) Upgrade vitest to v4 ([@SergeAstapov](https://github.com/SergeAstapov))\n\n#### Committers: 1\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n"
+  "description": "## Release (2025-11-13)\n\n* ember-vitest 0.2.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-vitest`\n  * [#9](https://github.com/NullVoxPopuli/ember-vitest/pull/9) Add @ember/test-helpers to peerDependencies ([@SergeAstapov](https://github.com/SergeAstapov))\n\n#### Committers: 1\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n"
 }
