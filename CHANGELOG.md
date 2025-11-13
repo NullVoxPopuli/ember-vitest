@@ -2,6 +2,17 @@
 
 ## Release (2025-11-13)
 
+* ember-vitest 0.2.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-vitest`
+  * [#9](https://github.com/NullVoxPopuli/ember-vitest/pull/9) Add @ember/test-helpers to peerDependencies ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
+## Release (2025-11-13)
+
 * ember-vitest 0.2.0 (minor)
 
 #### :rocket: Enhancement
