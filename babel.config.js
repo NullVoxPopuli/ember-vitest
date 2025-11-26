@@ -4,6 +4,14 @@ const macros = buildMacros();
 
 export default {
   plugins: [
+    [
+      "@babel/plugin-transform-typescript",
+      {
+        allExtensions: true,
+        allowDeclareFields: true,
+        onlyRemoveTypeImports: true,
+      },
+    ],
     ["@babel/plugin-syntax-explicit-resource-management"],
     [
       "babel-plugin-ember-template-compilation",
