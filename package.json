@@ -38,8 +38,6 @@
     "dist",
     "declarations"
   ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
   "scripts": {
     "build": "rollup --config",
     "lint": "prettier . --check",
