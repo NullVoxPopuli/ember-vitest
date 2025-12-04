@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-12-04)
+
+* ember-vitest 0.3.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-vitest`
+  * [#11](https://github.com/NullVoxPopuli/ember-vitest/pull/11) Convert to typescript ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## Release (2025-11-13)
 
 * ember-vitest 0.2.1 (patch)
