@@ -31,4 +31,4 @@ jobs:
 
     steps:
       - uses: wyvox/action@v1
-      - run: pnpm test || pnpm test
+      - run: pnpm build && pnpm test || pnpm test

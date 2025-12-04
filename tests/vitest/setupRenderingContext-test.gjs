@@ -5,7 +5,6 @@ import { fireEvent } from "testing-library-ember";
 import Service, { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import Component from "@glimmer/component";
-import Router from "@ember/routing/router";
 import Application from "ember-strict-application-resolver";
 
 import { setupRenderingContext } from "ember-vitest";
