@@ -1,6 +1,6 @@
 {
   "name": "ember-vitest",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "integration for testing Ember with Vitest",
   "keywords": [
     "ember",
