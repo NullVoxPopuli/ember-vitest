@@ -1,6 +1,6 @@
 # ember-vitest
 
-Ember<->Vitest integration
+ember <-> vitest integration
 
 - browser testing is first class
 - pause test execution for UI debugging purposes (and without pausing JS execution)
