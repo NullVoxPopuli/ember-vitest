@@ -36,6 +36,7 @@
   "files": [
     "ember-addon-main.cjs",
     "dist",
+    "src",
     "declarations"
   ],
   "scripts": {
