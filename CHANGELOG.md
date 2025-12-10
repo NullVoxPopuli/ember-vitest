@@ -2,6 +2,17 @@
 
 ## Release (2025-12-10)
 
+* ember-vitest 0.3.3 (patch)
+
+#### :bug: Bug Fix
+* `ember-vitest`
+  * [#24](https://github.com/NullVoxPopuli/ember-vitest/pull/24) Remove ignoreScripts setting from pnpm workspace ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+## Release (2025-12-10)
+
 * ember-vitest 0.3.2 (patch)
 
 #### :memo: Documentation
