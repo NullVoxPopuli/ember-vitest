@@ -1,18 +1,18 @@
 {
   "solution": {
     "ember-vitest": {
-      "impact": "minor",
-      "oldVersion": "0.2.1",
-      "newVersion": "0.3.0",
+      "impact": "patch",
+      "oldVersion": "0.3.0",
+      "newVersion": "0.3.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-12-04)\n\n* ember-vitest 0.3.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-vitest`\n  * [#11](https://github.com/NullVoxPopuli/ember-vitest/pull/11) Convert to typescript ([@SergeAstapov](https://github.com/SergeAstapov))\n\n#### Committers: 1\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n"
+  "description": "## Release (2025-12-10)\n\n* ember-vitest 0.3.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-vitest`\n  * [#14](https://github.com/NullVoxPopuli/ember-vitest/pull/14) Add 'src' to package.json files list ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
