@@ -2,6 +2,17 @@
 
 ## Release (2025-12-10)
 
+* ember-vitest 0.3.2 (patch)
+
+#### :memo: Documentation
+* `ember-vitest`
+  * [#23](https://github.com/NullVoxPopuli/ember-vitest/pull/23) Fix formatting in README for clarity ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+## Release (2025-12-10)
+
 * ember-vitest 0.3.1 (patch)
 
 #### :bug: Bug Fix
