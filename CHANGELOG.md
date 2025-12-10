@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-12-10)
+
+* ember-vitest 0.3.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-vitest`
+  * [#14](https://github.com/NullVoxPopuli/ember-vitest/pull/14) Add 'src' to package.json files list ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-12-04)
 
 * ember-vitest 0.3.0 (minor)
