@@ -2,17 +2,17 @@
   "solution": {
     "ember-vitest": {
       "impact": "patch",
-      "oldVersion": "0.3.0",
-      "newVersion": "0.3.1",
+      "oldVersion": "0.3.1",
+      "newVersion": "0.3.2",
       "tagName": "latest",
       "constraints": [
         {
           "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "reason": "Appears in changelog section :memo: Documentation"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-12-10)\n\n* ember-vitest 0.3.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-vitest`\n  * [#14](https://github.com/NullVoxPopuli/ember-vitest/pull/14) Add 'src' to package.json files list ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-12-10)\n\n* ember-vitest 0.3.2 (patch)\n\n#### :memo: Documentation\n* `ember-vitest`\n  * [#23](https://github.com/NullVoxPopuli/ember-vitest/pull/23) Fix formatting in README for clarity ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
