@@ -83,7 +83,7 @@
     "@ember/test-helpers": ">=4.0.0",
     "vitest": "^4.0.8"
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.26.0",
   "engines": {
     "node": "^20.11.0 || ^22 || >=24"
   },
