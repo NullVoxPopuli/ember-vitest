@@ -31,7 +31,7 @@ export function setupContext() {
   };
 }
 
-export async function setupRenderingContext(app: typeof EmberApplication) {
+export async function setupRenderingContext(app?: typeof EmberApplication) {
   let element = document.createElement("div");
   document.body.append(element);
 
