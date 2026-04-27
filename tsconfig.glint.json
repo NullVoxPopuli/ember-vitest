@@ -1,0 +1,20 @@
+{
+  "extends": "@ember/library-tsconfig",
+  "include": ["./src/**/*", "./tests/types/**/*"],
+  "compilerOptions": {
+    "target": "es2024",
+    "lib": ["esnext", "dom"],
+
+    "noEmit": true,
+    "emitDeclarationOnly": false,
+    "declaration": false,
+    "declarationMap": false,
+
+    "types": ["ember-source/types"],
+
+    "paths": {
+      "ember-vitest": ["./src/index.ts"],
+      "ember-vitest/*": ["./src/*"]
+    }
+  }
+}

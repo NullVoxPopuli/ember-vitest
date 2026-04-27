@@ -4,14 +4,12 @@ import {
   setupContext as emberSetupContext,
   teardownContext,
   setApplication,
-  type Target,
 } from "@ember/test-helpers";
 import { renderComponent } from "@ember/renderer";
 import { create, createApp } from "./create-app.ts";
 
 import type EmberApplication from "@ember/application";
-import type Component from "@glimmer/component";
-import type TOC from "@ember/component/template-only";
+import type { ComponentLike } from "@glint/template";
 
 export function setupContext() {
   let element = document.createElement("div");
@@ -85,9 +83,7 @@ export async function setupRenderingContext(app?: typeof EmberApplication) {
     click(target: Parameters<typeof click>[0]) {
       return click(target);
     },
-    async render(
-      component: (new (...args: unknown[]) => Component) | typeof TOC,
-    ) {
+    async render(component: ComponentLike<unknown>) {
       let result = renderComponent(component, {
         into: element,
         owner: ctx.owner,
