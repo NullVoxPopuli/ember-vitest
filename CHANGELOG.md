@@ -1,5 +1,25 @@
 # Changelog
 
+## Release (2026-04-28)
+
+* ember-vitest 0.4.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-vitest`
+  * [#34](https://github.com/NullVoxPopuli/ember-vitest/pull/34) Make app parameter optional in setupRenderingContext ([@evoactivity](https://github.com/evoactivity))
+
+#### :bug: Bug Fix
+* `ember-vitest`
+  * [#36](https://github.com/NullVoxPopuli/ember-vitest/pull/36) Accept ComponentLike in setupRenderingContext().render ([@evoactivity](https://github.com/evoactivity))
+
+#### :house: Internal
+* `ember-vitest`
+  * [#37](https://github.com/NullVoxPopuli/ember-vitest/pull/37) pnpm dlx create-release-plan-setup@latest --update ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- Liam ([@evoactivity](https://github.com/evoactivity))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-12-10)
 
 * ember-vitest 0.3.3 (patch)
