@@ -43,6 +43,7 @@
     "build": "rollup --config",
     "lint": "prettier . --check",
     "lint:fix": "prettier . --write",
+    "types:check": "ember-tsc --noEmit -p tsconfig.glint.json",
     "test": "vitest run --browser.headless",
     "test:dev": "vitest",
     "prepack": "rollup --config"
@@ -62,6 +63,8 @@
     "@embroider/macros": "^1.18.1",
     "@embroider/vite": "^1.2.0",
     "@glimmer/component": "^2.0.0",
+    "@glint/ember-tsc": "^1.5.0",
+    "@glint/template": "^1.7.7",
     "@rollup/plugin-babel": "^7.0.0",
     "@testing-library/dom": "^10.4.1",
     "@vitest/browser": "^4.0.13",
@@ -81,7 +84,13 @@
   },
   "peerDependencies": {
     "@ember/test-helpers": ">=4.0.0",
+    "@glint/template": "^1.0.0",
     "vitest": "^4.0.8"
+  },
+  "peerDependenciesMeta": {
+    "@glint/template": {
+      "optional": true
+    }
   },
   "packageManager": "pnpm@10.24.0",
   "engines": {

@@ -24,6 +24,15 @@ jobs:
       - uses: wyvox/action@v2
       - run: pnpm lint
 
+  typecheck:
+    name: "Typecheck"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: wyvox/action@v2
+      - run: pnpm types:check
+
   tests:
     name: "Tests"
     runs-on: ubuntu-latest
