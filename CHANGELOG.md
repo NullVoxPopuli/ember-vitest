@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2026-09-15)
+
+* ember-vitest 0.5.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-vitest`
+  * [#48](https://github.com/NullVoxPopuli/ember-vitest/pull/48) Tear down leaked contexts after each test ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#47](https://github.com/NullVoxPopuli/ember-vitest/pull/47) Record a trace mark on render ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#46](https://github.com/NullVoxPopuli/ember-vitest/pull/46) Add locator selectors to the rendering context ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#45](https://github.com/NullVoxPopuli/ember-vitest/pull/45) Use builder-pattern fixtures for the extended tests ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#44](https://github.com/NullVoxPopuli/ember-vitest/pull/44) Upgrade to vitest 5 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 1
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
 ## Release (2026-04-28)
 
 * ember-vitest 0.4.0 (minor)
