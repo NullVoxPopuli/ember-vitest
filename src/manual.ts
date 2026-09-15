@@ -6,7 +6,7 @@ import {
   setApplication,
 } from "@ember/test-helpers";
 import { renderComponent } from "@ember/renderer";
-import { vi } from "vitest";
+import { afterEach, vi } from "vitest";
 import {
   page,
   server,
@@ -32,22 +32,40 @@ export interface RenderingContext extends LocatorSelectors {
   [Symbol.asyncDispose]: () => Promise<void>;
 }
 
+type Disposable = { [Symbol.asyncDispose]: () => Promise<void> };
+
+let active = new Set<Disposable>();
+
+// Tears down any context a test forgot to dispose.
+async function cleanup() {
+  for (let context of active) {
+    await context[Symbol.asyncDispose]();
+  }
+}
+
+afterEach(cleanup);
+
 export function setupContext() {
   let element = document.createElement("div");
   document.body.append(element);
   const app = createApp(element);
 
-  return {
+  let context = {
     element,
     get owner() {
       return getOwner(app);
     },
     async [Symbol.asyncDispose]() {
+      active.delete(context);
       app.destroy();
       await settled();
       element.remove();
     },
   };
+
+  active.add(context);
+
+  return context;
 }
 
 let elementCount = 0;
@@ -123,7 +141,7 @@ export async function setupRenderingContext(
     await locator.mark("ember.render", { kind: "action" });
   });
 
-  return {
+  let context: RenderingContext = {
     element,
     get owner() {
       return ctx.owner;
@@ -137,11 +155,13 @@ export async function setupRenderingContext(
     },
     render,
     async [Symbol.dispose]() {
+      active.delete(context);
       renders.forEach((r) => r.destroy());
       await teardownContext(ctx);
       element.remove();
     },
     async [Symbol.asyncDispose]() {
+      active.delete(context);
       renders.forEach((r) => r.destroy());
       await settled();
       await teardownContext(ctx);
@@ -149,4 +169,8 @@ export async function setupRenderingContext(
       element.remove();
     },
   };
+
+  active.add(context);
+
+  return context;
 }
