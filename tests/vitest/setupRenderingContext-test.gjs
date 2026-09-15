@@ -97,3 +97,28 @@ describe("setupRenderingContext", () => {
     expect(out.textContent).toBe("1");
   });
 });
+
+describe("setupRenderingContext locators", () => {
+  test("has locator selectors scoped to the element", async () => {
+    using ctx = await setupRenderingContext();
+
+    const state = trackedObject({ value: 0 });
+    const increment = () => state.value++;
+
+    await ctx.render(
+      <template>
+        <button onclick={{increment}}>click me</button>
+        <output>{{state.value}}</output>
+      </template>,
+    );
+
+    await hardExpect
+      .element(ctx.getByRole("button"))
+      .toHaveTextContent("click me");
+    await hardExpect.element(ctx.locator).toMatchTextContent(/0/);
+
+    await ctx.getByRole("button").click();
+
+    await hardExpect.element(ctx.getByRole("status")).toHaveTextContent("1");
+  });
+});

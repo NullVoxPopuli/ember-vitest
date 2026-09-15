@@ -6,10 +6,30 @@ import {
   setApplication,
 } from "@ember/test-helpers";
 import { renderComponent } from "@ember/renderer";
+import {
+  page,
+  server,
+  utils,
+  type Locator,
+  type LocatorSelectors,
+} from "vitest/browser";
 import { create, createApp } from "./create-app.ts";
 
 import type EmberApplication from "@ember/application";
+import type { Owner } from "@ember/test-helpers/build-owner";
 import type { ComponentLike } from "@glint/template";
+
+export interface RenderingContext extends LocatorSelectors {
+  element: HTMLDivElement;
+  readonly owner: Owner;
+  locator: Locator;
+  find: ParentNode["querySelector"];
+  findAll: ParentNode["querySelectorAll"];
+  click: (target: Parameters<typeof click>[0]) => Promise<void>;
+  render: (component: ComponentLike<unknown>) => Promise<void>;
+  [Symbol.dispose]: () => Promise<void>;
+  [Symbol.asyncDispose]: () => Promise<void>;
+}
 
 export function setupContext() {
   let element = document.createElement("div");
@@ -29,9 +49,24 @@ export function setupContext() {
   };
 }
 
-export async function setupRenderingContext(app?: typeof EmberApplication) {
+let elementCount = 0;
+
+// Locators serialize an element as a CSS selector.
+// A test id keeps that selector stable across re-renders.
+function ensureTestId(element: HTMLElement) {
+  let attribute = server.config.browser.locators.testIdAttribute;
+
+  if (!element.hasAttribute(attribute)) {
+    element.setAttribute(attribute, `__ember_vitest_${elementCount++}__`);
+  }
+}
+
+export async function setupRenderingContext(
+  app?: typeof EmberApplication,
+): Promise<RenderingContext> {
   let element = document.createElement("div");
   document.body.append(element);
+  ensureTestId(element);
 
   let renders: Array<ReturnType<typeof renderComponent>> = [];
   let ctx = {} as TestContext;
@@ -80,6 +115,8 @@ export async function setupRenderingContext(app?: typeof EmberApplication) {
     },
     find,
     findAll,
+    locator: page.elementLocator(element),
+    ...utils.getElementLocatorSelectors(element),
     click(target: Parameters<typeof click>[0]) {
       return click(target);
     },
