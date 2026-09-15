@@ -92,7 +92,17 @@ The returned `ctx` from the `setupRenderingContext` has the following APIs:
 - `find(selector)`
 - `findAll(selector)`
 - `click(selector or element)`
-- `render(componet)`
+- `render(component)`
+- `locator`, a vitest [locator](https://vitest.dev/api/browser/locators) for `element`
+- `getByRole`, `getByText`, `getByTestId` and the other [locator selectors](https://vitest.dev/api/browser/locators), scoped to `element`
+
+The locators work with [`expect.element`](https://vitest.dev/api/browser/assertions), which retries until the assertion passes:
+
+```gjs
+await ctx.getByRole("button").click();
+
+await expect.element(ctx.getByRole("status")).toHaveTextContent("1");
+```
 
 ### Using extended `test`
 
