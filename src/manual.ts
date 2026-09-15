@@ -45,10 +45,11 @@ async function cleanup() {
 
 afterEach(cleanup);
 
-// Vitest calls this once at the end of each test file.
-page.extend({
-  [Symbol.for("vitest:component-cleanup")]: cleanup,
-});
+// The browser tester calls this symbol once per file after its tests.
+// `page.extend` skips symbol keys, so the symbol is set directly.
+const cleanupSymbol = Symbol.for("vitest:component-cleanup");
+
+(page as unknown as Record<symbol, unknown>)[cleanupSymbol] = cleanup;
 
 export function setupContext() {
   let element = document.createElement("div");
