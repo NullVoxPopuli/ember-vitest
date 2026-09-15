@@ -96,6 +96,8 @@ The returned `ctx` from the `setupRenderingContext` has the following APIs:
 - `locator`, a vitest [locator](https://vitest.dev/api/browser/locators) for `element`
 - `getByRole`, `getByText`, `getByTestId` and the other [locator selectors](https://vitest.dev/api/browser/locators), scoped to `element`
 
+`render` records an `ember.render` entry in the vitest [trace view](https://vitest.dev/guide/browser/trace-view) when `browser.traceView` is on.
+
 The locators work with [`expect.element`](https://vitest.dev/api/browser/assertions), which retries until the assertion passes:
 
 ```gjs

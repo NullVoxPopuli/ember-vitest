@@ -6,6 +6,7 @@ import {
   setApplication,
 } from "@ember/test-helpers";
 import { renderComponent } from "@ember/renderer";
+import { vi } from "vitest";
 import {
   page,
   server,
@@ -108,6 +109,20 @@ export async function setupRenderingContext(
     return element.querySelectorAll(selector);
   }
 
+  let locator = page.elementLocator(element);
+
+  // defineHelper makes the trace mark point at the test line.
+  let render = vi.defineHelper(async (component: ComponentLike<unknown>) => {
+    let result = renderComponent(component, {
+      into: element,
+      owner: ctx.owner,
+    });
+
+    renders.push(result);
+    await settled();
+    await locator.mark("ember.render", { kind: "action" });
+  });
+
   return {
     element,
     get owner() {
@@ -115,20 +130,12 @@ export async function setupRenderingContext(
     },
     find,
     findAll,
-    locator: page.elementLocator(element),
+    locator,
     ...utils.getElementLocatorSelectors(element),
     click(target: Parameters<typeof click>[0]) {
       return click(target);
     },
-    async render(component: ComponentLike<unknown>) {
-      let result = renderComponent(component, {
-        into: element,
-        owner: ctx.owner,
-      });
-
-      renders.push(result);
-      await settled();
-    },
+    render,
     async [Symbol.dispose]() {
       renders.forEach((r) => r.destroy());
       await teardownContext(ctx);
