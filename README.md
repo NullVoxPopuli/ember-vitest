@@ -112,7 +112,7 @@ import { visit, pauseTest } from "@ember/test-helpers";
 import App from "./your/app/location";
 
 describe("Home", () => {
-  applicationTest.scoped({ app: ({}, use) => use(App) });
+  applicationTest.override("app", () => App);
 
   applicationTest("can visit the home screen", async ({ element }) => {
     await visit("/");
@@ -135,7 +135,7 @@ import { Counter } from "#src/components/counter";
 
 describe("Counter", () => {
   // Optional: only needed if your component needs access to application state
-  // renderingTest.scoped({ app: ({}, use) => use(App) });
+  // renderingTest.override("app", () => App);
 
   renderingTest("can interact", async () => {
     await render(<template><Counter /></template>);
@@ -158,7 +158,7 @@ import { describe, it, expect } from "vitest";
 import { test } from "ember-vitest";
 
 describe("Container test", () => {
-  test.scoped({ app: ({}, use) => use(App) });
+  test.override("app", () => App);
 
   test("can interact", async ({ context }) => {
     let foo = context.owner.lookup("service:foo");

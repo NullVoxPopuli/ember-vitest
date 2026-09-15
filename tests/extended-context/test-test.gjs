@@ -16,7 +16,7 @@ class App extends Application {
 }
 
 describe("Container", () => {
-  test.scoped({ app: ({}, use) => use(App) });
+  test.override("app", () => App);
 
   test("works", async ({ context }) => {
     let foo = context.owner.lookup("service:foo");

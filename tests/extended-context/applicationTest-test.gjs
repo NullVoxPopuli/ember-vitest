@@ -18,7 +18,7 @@ class App extends Application {
 }
 
 describe("Home", () => {
-  applicationTest.scoped({ app: ({}, use) => use(App) });
+  applicationTest.override("app", () => App);
 
   applicationTest("can visit the home screen", async ({ element, env }) => {
     await visit("/");
