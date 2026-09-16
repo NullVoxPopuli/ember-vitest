@@ -88,9 +88,6 @@ importers:
       rollup:
         specifier: ^4.53.3
         version: 4.63.3
-      testing-library-ember:
-        specifier: ^1.0.0
-        version: 1.0.0(63dba3c31dbd19c72db92f213fb0a482)
       typescript:
         specifier: ^6.0.0
         version: 6.0.3
@@ -3786,12 +3783,6 @@ packages:
     resolution: {integrity: sha512-bWnjSNscmuI+GJze6ZupnHP8G/cTcsJF+bXCeQknk2SHQsgbNJnLrqiH9jZ2W4STPVXH2mDKKRX3iwPhc9Cn/Q==}
     engines: {node: '>=10'}
     hasBin: true
-
-  testing-library-ember@1.0.0:
-    resolution: {integrity: sha512-lGschgWp9VhZdcY1IoBguSz2jgE2qFy0eS7o6wjrxXvm6DdJAJuQiQbBZ10OSaKyE3I/Nqup/4cp190F+WhKdw==}
-    peerDependencies:
-      '@ember/test-helpers': ^2.0.0
-      '@testing-library/dom': ^8.0.0
 
   text-decoder@1.2.7:
     resolution: {integrity: sha512-vlLytXkeP4xvEq2otHeJfSQIRyWxo/oZGEbXrtEEF9Hnmrdly59sUbzZ/QgyWuLYHctCHxFF4tRQZNQ9k60ExQ==}
@@ -8467,14 +8458,6 @@ snapshots:
       acorn: 8.18.0
       commander: 2.20.3
       source-map-support: 0.5.21
-
-  testing-library-ember@1.0.0(63dba3c31dbd19c72db92f213fb0a482):
-    dependencies:
-      '@ember/test-helpers': 5.4.3(@babel/core@7.29.7)
-      '@embroider/addon-shim': 1.10.3
-      '@testing-library/dom': 10.4.2
-    transitivePeerDependencies:
-      - supports-color
 
   text-decoder@1.2.7:
     dependencies:

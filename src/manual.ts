@@ -1,5 +1,5 @@
 import { getOwner } from "@ember/owner";
-import { settled, click, type TestContext } from "@ember/test-helpers";
+import { settled, type TestContext } from "@ember/test-helpers";
 import {
   setupContext as emberSetupContext,
   teardownContext,
@@ -10,6 +10,7 @@ import { afterEach, vi } from "vitest";
 import {
   page,
   server,
+  userEvent,
   utils,
   type Locator,
   type LocatorSelectors,
@@ -26,7 +27,7 @@ export interface RenderingContext extends LocatorSelectors {
   locator: Locator;
   find: ParentNode["querySelector"];
   findAll: ParentNode["querySelectorAll"];
-  click: (target: Parameters<typeof click>[0]) => Promise<void>;
+  click: (target: string | Element | Locator) => Promise<void>;
   render: (component: ComponentLike<unknown>) => Promise<void>;
   [Symbol.dispose]: () => Promise<void>;
   [Symbol.asyncDispose]: () => Promise<void>;
@@ -129,6 +130,20 @@ export async function setupRenderingContext(
 
   let locator = page.elementLocator(element);
 
+  // userEvent goes through the browser provider,
+  // so the click is recorded in the trace view.
+  // defineHelper makes the trace entry point at the test line.
+  let click = vi.defineHelper(async (target: string | Element | Locator) => {
+    let found = typeof target === "string" ? find(target) : target;
+
+    if (!found) {
+      throw new Error(`Element not found when calling \`click('${target}')\`.`);
+    }
+
+    await userEvent.click(found);
+    await settled();
+  });
+
   // defineHelper makes the trace mark point at the test line.
   let render = vi.defineHelper(async (component: ComponentLike<unknown>) => {
     let result = renderComponent(component, {
@@ -150,9 +165,7 @@ export async function setupRenderingContext(
     findAll,
     locator,
     ...utils.getElementLocatorSelectors(element),
-    click(target: Parameters<typeof click>[0]) {
-      return click(target);
-    },
+    click,
     render,
     async [Symbol.dispose]() {
       active.delete(context);

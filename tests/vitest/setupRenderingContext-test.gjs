@@ -1,7 +1,6 @@
 import { trackedObject } from "@ember/reactive/collections";
 import { describe, test, expect as hardExpect } from "vitest";
 import { screen } from "@testing-library/dom";
-import { fireEvent } from "testing-library-ember";
 import Service, { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import Component from "@glimmer/component";
@@ -39,7 +38,7 @@ describe("setupRenderingContext", () => {
     expect(btn).toBeTruthy();
     expect(out.textContent).toBe("0");
 
-    await fireEvent.click(btn);
+    await ctx.click(btn);
     expect(out.textContent).toBe("1");
   });
 
