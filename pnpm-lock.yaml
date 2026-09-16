@@ -65,7 +65,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(0dc2ea671ef6bf2975a246abdda5d160)
       '@vitest/ui':
-        specifier: 5.0.1
+        specifier: ^5.0.1
         version: 5.0.1(vitest@5.0.1)
       babel-plugin-ember-template-compilation:
         specifier: ^4.0.0
