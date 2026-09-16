@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2026-09-16)
+
+* ember-vitest 0.6.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-vitest`
+  * [#53](https://github.com/NullVoxPopuli/ember-vitest/pull/53) Click through userEvent so clicks appear in the trace view ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### :house: Internal
+* `ember-vitest`
+  * [#52](https://github.com/NullVoxPopuli/ember-vitest/pull/52) Update @embroider/vite to fix a dep optimizer race ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#50](https://github.com/NullVoxPopuli/ember-vitest/pull/50) Publish the test report to GitHub Pages ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 1
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
 ## Release (2026-09-15)
 
 * ember-vitest 0.5.0 (minor)
