@@ -2,17 +2,21 @@
   "solution": {
     "ember-vitest": {
       "impact": "minor",
-      "oldVersion": "0.4.0",
-      "newVersion": "0.5.0",
+      "oldVersion": "0.5.0",
+      "newVersion": "0.6.0",
       "tagName": "latest",
       "constraints": [
         {
           "impact": "minor",
           "reason": "Appears in changelog section :rocket: Enhancement"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-09-15)\n\n* ember-vitest 0.5.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-vitest`\n  * [#48](https://github.com/NullVoxPopuli/ember-vitest/pull/48) Tear down leaked contexts after each test ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#47](https://github.com/NullVoxPopuli/ember-vitest/pull/47) Record a trace mark on render ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#46](https://github.com/NullVoxPopuli/ember-vitest/pull/46) Add locator selectors to the rendering context ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#45](https://github.com/NullVoxPopuli/ember-vitest/pull/45) Use builder-pattern fixtures for the extended tests ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#44](https://github.com/NullVoxPopuli/ember-vitest/pull/44) Upgrade to vitest 5 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 1\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n"
+  "description": "## Release (2026-09-16)\n\n* ember-vitest 0.6.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-vitest`\n  * [#53](https://github.com/NullVoxPopuli/ember-vitest/pull/53) Click through userEvent so clicks appear in the trace view ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### :house: Internal\n* `ember-vitest`\n  * [#52](https://github.com/NullVoxPopuli/ember-vitest/pull/52) Update @embroider/vite to fix a dep optimizer race ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#50](https://github.com/NullVoxPopuli/ember-vitest/pull/50) Publish the test report to GitHub Pages ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 1\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n"
 }
