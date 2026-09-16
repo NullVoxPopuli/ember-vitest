@@ -64,6 +64,9 @@ importers:
       '@vitest/browser-webdriverio':
         specifier: ^5.0.0
         version: 5.0.0(75c8a86320d010aa2a6edc0181ddeda8)
+      '@vitest/ui':
+        specifier: 5.0.1
+        version: 5.0.1(vitest@5.0.1)
       babel-plugin-ember-template-compilation:
         specifier: ^4.0.0
         version: 4.0.0

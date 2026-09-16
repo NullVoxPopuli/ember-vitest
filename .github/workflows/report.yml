@@ -1,0 +1,36 @@
+name: Test report
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  report:
+    name: "Publish test report"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - uses: wyvox/action@v2
+      - run: pnpm build
+      # A failed run still publishes, so failures can be inspected.
+      - run: pnpm test:report || true
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: .vitest
+      - id: deploy
+        uses: actions/deploy-pages@v5

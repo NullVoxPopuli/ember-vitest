@@ -45,6 +45,7 @@
     "lint:fix": "prettier . --write",
     "prepack": "rollup --config",
     "test": "vitest run --browser.headless",
+    "test:report": "vitest run --browser.headless --browser.traceView --reporter=html --reporter=default",
     "test:dev": "vitest",
     "types:check": "ember-tsc --noEmit -p tsconfig.glint.json"
   },
@@ -69,6 +70,7 @@
     "@testing-library/dom": "^10.4.1",
     "@vitest/browser": "^5.0.1",
     "@vitest/browser-webdriverio": "^5.0.0",
+    "@vitest/ui": "5.0.1",
     "babel-plugin-ember-template-compilation": "^4.0.0",
     "decorator-transforms": "^2.3.0",
     "ember-source": "^6.8.1",
