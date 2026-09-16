@@ -47,13 +47,11 @@ describe("example", () => {
   });
 ```
 
-And interactivity can be done via [`@testing-library/dom`](https://testing-library.com/docs/queries/about) and [`testing-library-ember`](https://github.com/nullvoxpopuli/testing-library-ember/) (which provides settled-state integration with testing-library's `fireEvent` utility, so you don't have to even "wait" or check for things in a loop. This cleans up tests significantly when async rendering is involved.)
+Interactions go through vitest's [`userEvent`](https://vitest.dev/api/browser/interactivity), so they use the real browser and show up in the [trace view](https://vitest.dev/guide/browser/trace-view). `ctx.click` waits for Ember to settle afterwards, so you can assert right away.
 
 ```gjs
 import { trackedObject } from "@ember/reactive/collections";
 import { describe, test, expect as hardExpect } from "vitest";
-import { screen } from "@testing-library/dom";
-import { fireEvent } from "testing-library-ember";
 
 import { setupRenderingContext } from "ember-vitest";
 
@@ -68,18 +66,16 @@ describe("example", () => {
 
     await ctx.render(
       <template>
-        <button role="button" onclick={{increment}}>click me</button>
+        <button onclick={{increment}}>click me</button>
         <output>{{state.value}}</output>
       </template>,
     );
 
-    let btn = screen.getByText(/click me/);
-    let out = ctx.element.querySelector("output");
+    let out = ctx.find("output");
 
-    expect(btn).toBeTruthy();
     expect(out.textContent).toBe("0");
 
-    await fireEvent.click(btn);
+    await ctx.click("button");
     expect(out.textContent).toBe("1");
   });
 });
@@ -91,7 +87,7 @@ The returned `ctx` from the `setupRenderingContext` has the following APIs:
 - `owner`
 - `find(selector)`
 - `findAll(selector)`
-- `click(selector or element)`
+- `click(selector, element or locator)`, through `userEvent`, then waits for settled
 - `render(component)`
 - `locator`, a vitest [locator](https://vitest.dev/api/browser/locators) for `element`
 - `getByRole`, `getByText`, `getByTestId` and the other [locator selectors](https://vitest.dev/api/browser/locators), scoped to `element`
@@ -143,7 +139,8 @@ These sorts of tests are very versatile, as they enable you to test not just com
 ```gjs
 import { describe, it, expect } from "vitest";
 import { renderingTest } from "ember-vitest";
-import { find, click, render } from "@ember/test-helpers";
+import { find, render, settled } from "@ember/test-helpers";
+import { page } from "vitest/browser";
 
 import { Counter } from "#src/components/counter";
 
@@ -156,7 +153,8 @@ describe("Counter", () => {
 
     expect(find("output").textContent).toBe("0");
 
-    await click("button");
+    await page.getByRole("button").click();
+    await settled();
 
     expect(find("output").textContent).toBe("1");
   });
