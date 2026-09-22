@@ -14,6 +14,8 @@ import { test as baseTest } from "vitest";
 
 import Application from "ember-strict-application-resolver";
 
+import "./trace-marks.ts";
+
 import type EmberApplication from "@ember/application";
 
 globalThis.resumeTest = resumeTest;
