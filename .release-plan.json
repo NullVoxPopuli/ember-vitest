@@ -2,8 +2,8 @@
   "solution": {
     "ember-vitest": {
       "impact": "minor",
-      "oldVersion": "0.5.0",
-      "newVersion": "0.6.0",
+      "oldVersion": "0.6.0",
+      "newVersion": "0.7.0",
       "tagName": "latest",
       "constraints": [
         {
@@ -18,5 +18,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-09-16)\n\n* ember-vitest 0.6.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-vitest`\n  * [#53](https://github.com/NullVoxPopuli/ember-vitest/pull/53) Click through userEvent so clicks appear in the trace view ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### :house: Internal\n* `ember-vitest`\n  * [#52](https://github.com/NullVoxPopuli/ember-vitest/pull/52) Update @embroider/vite to fix a dep optimizer race ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#50](https://github.com/NullVoxPopuli/ember-vitest/pull/50) Publish the test report to GitHub Pages ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 1\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n"
+  "description": "## Release (2026-09-22)\n\n* ember-vitest 0.7.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-vitest`\n  * [#57](https://github.com/NullVoxPopuli/ember-vitest/pull/57) Point @ember/test-helpers marks at the test line ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#54](https://github.com/NullVoxPopuli/ember-vitest/pull/54) Record @ember/test-helpers helpers in the trace view and run their hooks ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### :house: Internal\n* `ember-vitest`\n  * [#56](https://github.com/NullVoxPopuli/ember-vitest/pull/56) Test setupRenderingContext with the @ember/test-helpers helpers ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 1\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n"
 }

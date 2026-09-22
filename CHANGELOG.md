@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2026-09-22)
+
+* ember-vitest 0.7.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-vitest`
+  * [#57](https://github.com/NullVoxPopuli/ember-vitest/pull/57) Point @ember/test-helpers marks at the test line ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#54](https://github.com/NullVoxPopuli/ember-vitest/pull/54) Record @ember/test-helpers helpers in the trace view and run their hooks ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### :house: Internal
+* `ember-vitest`
+  * [#56](https://github.com/NullVoxPopuli/ember-vitest/pull/56) Test setupRenderingContext with the @ember/test-helpers helpers ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 1
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
 ## Release (2026-09-16)
 
 * ember-vitest 0.6.0 (minor)
