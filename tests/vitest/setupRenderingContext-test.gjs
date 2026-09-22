@@ -1,6 +1,7 @@
 import { trackedObject } from "@ember/reactive/collections";
 import { describe, test, expect as hardExpect } from "vitest";
 import { screen } from "@testing-library/dom";
+import { registerHook } from "@ember/test-helpers";
 import Service, { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import Component from "@glimmer/component";
@@ -119,5 +120,41 @@ describe("setupRenderingContext locators", () => {
     await ctx.getByRole("button").click();
 
     await hardExpect.element(ctx.getByRole("status")).toHaveTextContent("1");
+  });
+});
+
+describe("setupRenderingContext test-helpers hooks", () => {
+  test("click and render run the registered hooks", async () => {
+    let calls = [];
+    let hooks = [
+      registerHook("render", "start", () => calls.push("render:start")),
+      registerHook("render", "end", () => calls.push("render:end")),
+      registerHook("click", "start", (target) =>
+        calls.push(`click:start ${target.tagName}`),
+      ),
+      registerHook("click", "end", (target) =>
+        calls.push(`click:end ${target.tagName}`),
+      ),
+    ];
+
+    try {
+      using ctx = await setupRenderingContext();
+
+      await ctx.render(
+        <template>
+          <button>click me</button>
+        </template>,
+      );
+      await ctx.click("button");
+
+      expect(calls).toEqual([
+        "render:start",
+        "render:end",
+        "click:start BUTTON",
+        "click:end BUTTON",
+      ]);
+    } finally {
+      hooks.forEach((hook) => hook.unregister());
+    }
   });
 });

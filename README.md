@@ -96,6 +96,8 @@ A context that a test does not dispose is torn down after that test, so one leak
 
 `render` records an `ember.render` entry in the vitest [trace view](https://vitest.dev/guide/browser/trace-view) when `browser.traceView` is on.
 
+The `@ember/test-helpers` helpers (`fillIn`, `triggerEvent`, `visit`, and the rest) record an entry too, through their [hooks](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#registerhook). `ctx.click` and `ctx.render` run the `click` and `render` hooks, so a hook registered with `registerHook` sees them as well.
+
 The locators work with [`expect.element`](https://vitest.dev/api/browser/assertions), which retries until the assertion passes:
 
 ```gjs

@@ -1,5 +1,5 @@
 import { getOwner } from "@ember/owner";
-import { settled, type TestContext } from "@ember/test-helpers";
+import { runHooks, settled, type TestContext } from "@ember/test-helpers";
 import {
   setupContext as emberSetupContext,
   teardownContext,
@@ -16,6 +16,7 @@ import {
   type LocatorSelectors,
 } from "vitest/browser";
 import { create, createApp } from "./create-app.ts";
+import { runHooksWithoutMark } from "./trace-marks.ts";
 
 import type EmberApplication from "@ember/application";
 import type { Owner } from "@ember/test-helpers/build-owner";
@@ -133,6 +134,8 @@ export async function setupRenderingContext(
   // userEvent goes through the browser provider,
   // so the click is recorded in the trace view.
   // defineHelper makes the trace entry point at the test line.
+  // The @ember/test-helpers `click` hooks still run,
+  // so hooks registered for `click` see this click too.
   let click = vi.defineHelper(async (target: string | Element | Locator) => {
     let found = typeof target === "string" ? find(target) : target;
 
@@ -140,12 +143,19 @@ export async function setupRenderingContext(
       throw new Error(`Element not found when calling \`click('${target}')\`.`);
     }
 
-    await userEvent.click(found);
+    let element = found instanceof Element ? found : found.element();
+
+    await runHooksWithoutMark("click", "start", element);
+    await userEvent.click(element);
     await settled();
+    await runHooksWithoutMark("click", "end", element);
   });
 
+  // The `render` hooks record the trace mark.
   // defineHelper makes the trace mark point at the test line.
   let render = vi.defineHelper(async (component: ComponentLike<unknown>) => {
+    await runHooks("render", "start");
+
     let result = renderComponent(component, {
       into: element,
       owner: ctx.owner,
@@ -153,7 +163,7 @@ export async function setupRenderingContext(
 
     renders.push(result);
     await settled();
-    await locator.mark("ember.render", { kind: "action" });
+    await runHooks("render", "end");
   });
 
   let context: RenderingContext = {
