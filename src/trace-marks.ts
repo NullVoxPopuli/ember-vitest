@@ -61,12 +61,37 @@ function markName(helperName: string, args: unknown[]) {
   return `ember.${helperName}(${described.join(", ")})`;
 }
 
+// Matches the pre-bundled, pnpm and plain paths of the package.
+const TEST_HELPERS_FRAME = /@ember[_+/]test-helpers/;
+
+/**
+ * Returns the stack from the caller of the @ember/test-helpers helper.
+ *
+ * Vitest resolves a mark's location from the first frame of its stack.
+ * The hook runs from a promise chain inside @ember/test-helpers, so the
+ * first frames are this file and that package. V8 keeps the awaiting
+ * test function as an async frame below them.
+ */
+function callerStack() {
+  let lines = (new Error().stack ?? "").split("\n");
+  let last = -1;
+
+  for (let i = 0; i < lines.length; i++) {
+    if (TEST_HELPERS_FRAME.test(lines[i]!)) last = i;
+  }
+
+  if (last === -1) return undefined;
+
+  return lines.slice(last + 1).join("\n");
+}
+
 for (let helperName of HELPERS) {
   registerHook(helperName, "start", (...args: unknown[]) => {
     if (silenced) return;
 
-    // @ember/test-helpers runs hooks from a promise chain,
-    // so a mark for its own helpers cannot point at the test line.
-    return page.mark(markName(helperName, args), { kind: "action" });
+    return page.mark(markName(helperName, args), {
+      kind: "action",
+      stack: callerStack(),
+    });
   });
 }
