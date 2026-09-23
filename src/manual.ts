@@ -1,4 +1,3 @@
-import { getOwner } from "@ember/owner";
 import { runHooks, settled, type TestContext } from "@ember/test-helpers";
 import {
   setupContext as emberSetupContext,
@@ -15,10 +14,11 @@ import {
   type Locator,
   type LocatorSelectors,
 } from "vitest/browser";
-import { create, createApp } from "./create-app.ts";
+import { create } from "./create-app.ts";
 import { runHooksWithoutMark } from "./trace-marks.ts";
 
 import type EmberApplication from "@ember/application";
+import type ApplicationInstance from "@ember/application/instance";
 import type { Owner } from "@ember/test-helpers/build-owner";
 import type { ComponentLike } from "@glint/template";
 
@@ -47,19 +47,40 @@ async function cleanup() {
 
 afterEach(cleanup);
 
-export function setupContext() {
+export interface Context {
+  element: HTMLDivElement;
+  /**
+   * The booted instance of the app.
+   */
+  owner: ApplicationInstance;
+  [Symbol.asyncDispose]: () => Promise<void>;
+}
+
+/**
+ * Boots an instance of the app, for tests that need an owner
+ * but do not render.
+ */
+export async function setupContext(
+  app?: typeof EmberApplication,
+): Promise<Context> {
   let element = document.createElement("div");
   document.body.append(element);
-  const app = createApp(element);
 
-  let context = {
+  let application = create(app, element);
+
+  await application.boot();
+
+  let instance = application.buildInstance();
+
+  await instance.boot();
+
+  let context: Context = {
     element,
-    get owner() {
-      return getOwner(app);
-    },
+    owner: instance,
     async [Symbol.asyncDispose]() {
       active.delete(context);
-      app.destroy();
+      instance.destroy();
+      application.destroy();
       await settled();
       element.remove();
     },
