@@ -1,0 +1,29 @@
+/* Colors from the emberjs.com styleguide */
+:root {
+  --ember-brand: #e04e39;
+  --ember-brand-hc-dark: #cf2d20;
+  --ember-brand-hc-light: #ff5c44;
+  --ember-lilac: #7650f1;
+
+  /* Text and links use the high-contrast variant for each background. */
+  --vp-c-brand-1: var(--ember-brand-hc-dark);
+  --vp-c-brand-2: var(--ember-brand);
+  --vp-c-brand-3: var(--ember-brand);
+  --vp-c-brand-soft: rgba(224, 78, 57, 0.14);
+
+  --vp-button-brand-bg: var(--ember-brand);
+  --vp-button-brand-hover-bg: var(--ember-brand-hc-dark);
+  --vp-button-brand-active-bg: var(--ember-brand-hc-dark);
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(
+    135deg,
+    var(--ember-brand) 0%,
+    var(--ember-lilac) 100%
+  );
+}
+
+.dark {
+  --vp-c-brand-1: var(--ember-brand-hc-light);
+  --vp-c-brand-soft: rgba(224, 78, 57, 0.2);
+}
