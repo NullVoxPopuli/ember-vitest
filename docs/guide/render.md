@@ -44,6 +44,11 @@ The returned `screen` has:
 
 The render is removed after each test.
 
+## Parallel tests
+
+In a concurrent test, pass the test context as `{ context }`.
+See [Parallel tests](./parallel).
+
 ## Additional testing styles
 
 `render` does not set up an `@ember/test-helpers` test context.

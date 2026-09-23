@@ -43,6 +43,11 @@ The returned `screen` has:
 
 The app is torn down after each test.
 
+## Parallel tests
+
+In a concurrent test, pass the test context as `{ context }`.
+See [Parallel tests](./parallel).
+
 ## Additional testing styles
 
 `visit` does not set up an `@ember/test-helpers` test context.

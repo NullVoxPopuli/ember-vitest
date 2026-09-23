@@ -7,6 +7,7 @@
 import Component from "@glimmer/component";
 import { render, setupRenderingContext, visit } from "ember-vitest";
 import Application from "@ember/application";
+import type { TestContext } from "vitest";
 
 // Inline `<template>...</template>` expression.
 async function inlineTemplateExpression() {
@@ -55,6 +56,12 @@ async function standaloneVisit() {
   return url;
 }
 
+// Concurrent tests pass the vitest test context.
+async function withTestContext(context: TestContext) {
+  await render(Counter, { context });
+  await visit(Application, "/", { context });
+}
+
 // Suppress "declared but never read" for the helpers; they exist solely so
 // ember-tsc can typecheck the bodies above.
 export {
@@ -63,4 +70,5 @@ export {
   classComponent,
   standaloneRender,
   standaloneVisit,
+  withTestContext,
 };

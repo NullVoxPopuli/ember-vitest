@@ -7,7 +7,8 @@ import { babel } from "@rollup/plugin-babel";
 export default defineConfig({
   test: {
     include: ["tests/**/*-test.{gjs,gts}"],
-    maxConcurrency: 1,
+    // Only tests marked `concurrent` run at the same time.
+    maxConcurrency: 5,
     browser: {
       enabled: true,
       provider: webdriverio(),

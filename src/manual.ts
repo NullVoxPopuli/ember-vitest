@@ -5,7 +5,7 @@ import {
   setApplication,
 } from "@ember/test-helpers";
 import { renderComponent } from "@ember/renderer";
-import { afterEach, vi } from "vitest";
+import { afterEach, vi, type TestContext as VitestTestContext } from "vitest";
 import {
   page,
   server,
@@ -46,6 +46,27 @@ async function cleanup() {
 }
 
 afterEach(cleanup);
+
+/**
+ * The part of the vitest test context that cleanup needs.
+ */
+export type CleanupContext = Pick<VitestTestContext, "onTestFinished">;
+
+/**
+ * Tears down `disposable` when its test finishes.
+ *
+ * vitest does not tell global hooks which concurrent test is running,
+ * so the `afterEach` cleanup disposes the renders of every running test.
+ * With the test context, cleanup is scoped to the test that owns it.
+ */
+export function track(disposable: Disposable, context?: CleanupContext) {
+  if (context) {
+    context.onTestFinished(() => disposable[Symbol.asyncDispose]());
+    return;
+  }
+
+  active.add(disposable);
+}
 
 export interface Context {
   element: HTMLDivElement;

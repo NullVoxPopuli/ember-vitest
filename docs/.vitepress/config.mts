@@ -32,6 +32,7 @@ export default defineConfig({
         items: [
           { text: "render", link: "/guide/render" },
           { text: "visit", link: "/guide/visit" },
+          { text: "Parallel tests", link: "/guide/parallel" },
         ],
       },
       {

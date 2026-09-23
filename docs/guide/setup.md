@@ -14,6 +14,7 @@ export default defineConfig({
   // Add this config
   test: {
     include: ["tests/**/*-test.{gjs,gts}"],
+    // Increase this to run concurrent tests at the same time. See "Parallel tests".
     maxConcurrency: 1,
     browser: {
       provider: webdriverio(),
