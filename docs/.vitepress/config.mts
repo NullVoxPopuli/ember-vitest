@@ -22,7 +22,7 @@ export default defineConfig({
           { text: "Getting started", link: "/guide/" },
           { text: "Setup", link: "/guide/setup" },
           {
-            text: "Vanilla Vitest (Vitest without this library)",
+            text: "without this library...",
             link: "/guide/vanilla",
           },
         ],
