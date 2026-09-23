@@ -41,3 +41,12 @@ jobs:
     steps:
       - uses: wyvox/action@v2
       - run: pnpm build && pnpm test || pnpm test
+
+  docs:
+    name: "Docs"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: wyvox/action@v2
+      - run: pnpm docs:build

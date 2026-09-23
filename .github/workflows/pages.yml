@@ -1,4 +1,4 @@
-name: Test report
+name: Pages
 
 on:
   push:
@@ -15,8 +15,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  report:
-    name: "Publish test report"
+  pages:
+    name: "Publish docs and test report"
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
@@ -30,9 +30,12 @@ jobs:
       - run: pnpm test:report || true
       - name: Check that a report was written
         run: test -f .vitest/index.html || { echo "::error::vitest wrote no report. See the test:report step."; exit 1; }
+      - run: pnpm docs:build
+      # The test report is served from the tests/ sub-path of the docs.
+      - run: cp -r .vitest docs/.vitepress/dist/tests
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: .vitest
+          path: docs/.vitepress/dist
       - id: deploy
         uses: actions/deploy-pages@v5

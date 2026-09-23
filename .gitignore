@@ -3,3 +3,5 @@ dist/
 node_modules/
 __screenshots__/
 .vitest/
+docs/.vitepress/cache
+docs/.vitepress/dist
