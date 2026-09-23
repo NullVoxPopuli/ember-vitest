@@ -7,7 +7,7 @@ import {
   type Locator,
   type LocatorSelectors,
 } from "vitest/browser";
-import { active, ensureTestId } from "./manual.ts";
+import { active, ensureTestId, track, type CleanupContext } from "./manual.ts";
 
 import type { ComponentLike } from "@glint/template";
 
@@ -20,6 +20,12 @@ export interface RenderOptions {
    * Args for the component. A tracked object keeps them reactive.
    */
   args?: Record<string, unknown>;
+  /**
+   * The vitest test context.
+   * Concurrent tests must pass it, so that the render is torn down
+   * when this test finishes, and not when another test finishes.
+   */
+  context?: CleanupContext;
 }
 
 export interface RenderResult extends LocatorSelectors {
@@ -55,7 +61,11 @@ export const render = vi.defineHelper(
     });
 
     let rendered = {
+      disposed: false,
       async [Symbol.asyncDispose]() {
+        if (rendered.disposed) return;
+
+        rendered.disposed = true;
         active.delete(rendered);
         result.destroy();
         await settled();
@@ -63,7 +73,7 @@ export const render = vi.defineHelper(
       },
     };
 
-    active.add(rendered);
+    track(rendered, options.context);
 
     await settled();
     await runHooks("render", "end");

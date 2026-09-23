@@ -6,11 +6,20 @@ import {
   type Locator,
   type LocatorSelectors,
 } from "vitest/browser";
-import { active, ensureTestId } from "./manual.ts";
+import { active, ensureTestId, track, type CleanupContext } from "./manual.ts";
 
 import type EmberApplication from "@ember/application";
 import type ApplicationInstance from "@ember/application/instance";
 import type RouterService from "@ember/routing/router-service";
+
+export interface VisitOptions {
+  /**
+   * The vitest test context.
+   * Concurrent tests must pass it, so that the app is torn down
+   * when this test finishes, and not when another test finishes.
+   */
+  context?: CleanupContext;
+}
 
 export interface VisitResult extends LocatorSelectors {
   /**
@@ -39,7 +48,11 @@ export interface VisitResult extends LocatorSelectors {
  * The app is torn down after the test.
  */
 export const visit = vi.defineHelper(
-  async (App: typeof EmberApplication, url: string): Promise<VisitResult> => {
+  async (
+    App: typeof EmberApplication,
+    url: string,
+    options: VisitOptions = {},
+  ): Promise<VisitResult> => {
     let container = document.createElement("div");
     document.body.append(container);
     ensureTestId(container);
@@ -51,7 +64,11 @@ export const visit = vi.defineHelper(
 
     let booted = {
       instance: undefined as ApplicationInstance | undefined,
+      disposed: false,
       async [Symbol.asyncDispose]() {
+        if (booted.disposed) return;
+
+        booted.disposed = true;
         active.delete(booted);
         booted.instance?.destroy();
         app.destroy();
@@ -60,7 +77,7 @@ export const visit = vi.defineHelper(
       },
     };
 
-    active.add(booted);
+    track(booted, options.context);
 
     // `location: "none"` keeps the app from changing the URL of the test page.
     let instance = (await app.visit(url, {
