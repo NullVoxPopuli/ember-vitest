@@ -5,7 +5,8 @@
 // `TemplateOnlyComponent` value, and must be accepted by `render`.
 
 import Component from "@glimmer/component";
-import { render, setupRenderingContext } from "ember-vitest";
+import { render, setupRenderingContext, visit } from "ember-vitest";
+import Application from "@ember/application";
 
 // Inline `<template>...</template>` expression.
 async function inlineTemplateExpression() {
@@ -44,6 +45,16 @@ async function standaloneRender() {
   return container;
 }
 
+// `visit` takes an app class and returns the owner and locator selectors.
+async function standaloneVisit() {
+  const screen = await visit(Application, "/");
+  const url: string | null = screen.currentURL;
+  screen.owner.lookup("service:router");
+  await screen.getByRole("link").click();
+  await screen.visit("/about");
+  return url;
+}
+
 // Suppress "declared but never read" for the helpers; they exist solely so
 // ember-tsc can typecheck the bodies above.
 export {
@@ -51,4 +62,5 @@ export {
   templateConst,
   classComponent,
   standaloneRender,
+  standaloneVisit,
 };

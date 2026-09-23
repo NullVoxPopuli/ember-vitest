@@ -40,7 +40,7 @@ describe("Rendering | component | ui | button", () => {
 The [documentation](https://nullvoxpopuli.github.io/ember-vitest/) has:
 
 - [Vanilla Vitest (Vitest without this library)](https://nullvoxpopuli.github.io/ember-vitest/guide/vanilla)
-- Core APIs: [`render`](https://nullvoxpopuli.github.io/ember-vitest/guide/render)
+- Core APIs: [`render`](https://nullvoxpopuli.github.io/ember-vitest/guide/render) and [`visit`](https://nullvoxpopuli.github.io/ember-vitest/guide/visit)
 - Additional testing styles: [`setupRenderingContext`](https://nullvoxpopuli.github.io/ember-vitest/guide/setup-rendering-context) and the [extended `test`](https://nullvoxpopuli.github.io/ember-vitest/guide/extended-test)
 
 The [test report](https://nullvoxpopuli.github.io/ember-vitest/tests/) of this repository has the result and the trace of each test.

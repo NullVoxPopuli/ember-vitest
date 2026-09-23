@@ -1,0 +1,94 @@
+import { runHooks, settled } from "@ember/test-helpers";
+import { vi } from "vitest";
+import {
+  page,
+  utils,
+  type Locator,
+  type LocatorSelectors,
+} from "vitest/browser";
+import { active, ensureTestId } from "./manual.ts";
+
+import type EmberApplication from "@ember/application";
+import type ApplicationInstance from "@ember/application/instance";
+import type RouterService from "@ember/routing/router-service";
+
+export interface VisitResult extends LocatorSelectors {
+  /**
+   * The element that the app renders into.
+   */
+  container: HTMLDivElement;
+  locator: Locator;
+  /**
+   * The booted instance of the app.
+   */
+  owner: ApplicationInstance;
+  /**
+   * The URL of the app, from the router service.
+   */
+  readonly currentURL: string | null;
+  /**
+   * Navigates the same app to another URL.
+   */
+  visit: (url: string) => Promise<void>;
+  unmount: () => Promise<void>;
+}
+
+/**
+ * Boots an app into a new element on the page and visits a URL.
+ *
+ * The app is torn down after the test.
+ */
+export const visit = vi.defineHelper(
+  async (App: typeof EmberApplication, url: string): Promise<VisitResult> => {
+    let container = document.createElement("div");
+    document.body.append(container);
+    ensureTestId(container);
+
+    // The `visit` hooks record the trace mark.
+    await runHooks("visit", "start", url);
+
+    let app = App.create({ autoboot: false, rootElement: container });
+
+    let booted = {
+      instance: undefined as ApplicationInstance | undefined,
+      async [Symbol.asyncDispose]() {
+        active.delete(booted);
+        booted.instance?.destroy();
+        app.destroy();
+        await settled();
+        container.remove();
+      },
+    };
+
+    active.add(booted);
+
+    // `location: "none"` keeps the app from changing the URL of the test page.
+    let instance = (await app.visit(url, {
+      location: "none",
+    })) as ApplicationInstance;
+
+    booted.instance = instance;
+
+    await settled();
+    await runHooks("visit", "end", url);
+
+    let router = instance.lookup("service:router") as RouterService;
+
+    return {
+      container,
+      locator: page.elementLocator(container),
+      ...utils.getElementLocatorSelectors(container),
+      owner: instance,
+      get currentURL() {
+        return router.currentURL;
+      },
+      visit: vi.defineHelper(async (next: string) => {
+        await runHooks("visit", "start", next);
+        await instance.visit(next);
+        await settled();
+        await runHooks("visit", "end", next);
+      }),
+      unmount: () => booted[Symbol.asyncDispose](),
+    };
+  },
+);

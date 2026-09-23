@@ -8,3 +8,6 @@ export { setupContext, setupRenderingContext } from "./manual.ts";
 
 export { render } from "./render.ts";
 export type { RenderOptions, RenderResult } from "./render.ts";
+
+export { visit } from "./visit.ts";
+export type { VisitResult } from "./visit.ts";
