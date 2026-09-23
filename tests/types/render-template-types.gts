@@ -5,7 +5,7 @@
 // `TemplateOnlyComponent` value, and must be accepted by `render`.
 
 import Component from "@glimmer/component";
-import { setupRenderingContext } from "ember-vitest";
+import { render, setupRenderingContext } from "ember-vitest";
 
 // Inline `<template>...</template>` expression.
 async function inlineTemplateExpression() {
@@ -35,6 +35,20 @@ async function classComponent() {
   await ctx.render(Counter);
 }
 
+// The standalone `render` returns locator selectors.
+async function standaloneRender() {
+  const screen = await render(<template><Counter /></template>);
+  const container: HTMLDivElement = screen.container;
+  await screen.getByRole("button").click();
+  await render(Counter, { args: {}, owner: {} });
+  return container;
+}
+
 // Suppress "declared but never read" for the helpers; they exist solely so
 // ember-tsc can typecheck the bodies above.
-export { inlineTemplateExpression, templateConst, classComponent };
+export {
+  inlineTemplateExpression,
+  templateConst,
+  classComponent,
+  standaloneRender,
+};
