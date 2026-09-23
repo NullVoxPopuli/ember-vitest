@@ -38,3 +38,16 @@ The returned `screen` has:
 - `unmount()`, to remove the render before the test ends
 
 The render is removed after each test.
+
+## `@ember/test-helpers`
+
+`render` does not set up an `@ember/test-helpers` test context.
+The helpers from `@ember/test-helpers` still work if you pass them an element:
+
+```gjs
+import { fillIn } from "@ember/test-helpers";
+
+await fillIn(screen.container.querySelector("input"), "hello");
+```
+
+To pass selector strings, such as `fillIn("input", "hello")`, use [`setupRenderingContext`](./setup-rendering-context).

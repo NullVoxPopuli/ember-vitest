@@ -37,11 +37,10 @@ describe("Rendering | component | ui | button", () => {
 });
 ```
 
-The [documentation](https://nullvoxpopuli.github.io/ember-vitest/) describes all of the ways to write a test:
+The [documentation](https://nullvoxpopuli.github.io/ember-vitest/) has:
 
-- [Vanilla vitest](https://nullvoxpopuli.github.io/ember-vitest/guide/vanilla)
-- [`render`](https://nullvoxpopuli.github.io/ember-vitest/guide/render)
-- [`setupRenderingContext`](https://nullvoxpopuli.github.io/ember-vitest/guide/setup-rendering-context)
-- [Extended `test`](https://nullvoxpopuli.github.io/ember-vitest/guide/extended-test)
+- [Vanilla Vitest (Vitest without this library)](https://nullvoxpopuli.github.io/ember-vitest/guide/vanilla)
+- Core APIs: [`render`](https://nullvoxpopuli.github.io/ember-vitest/guide/render)
+- Additional testing styles: [`setupRenderingContext`](https://nullvoxpopuli.github.io/ember-vitest/guide/setup-rendering-context) and the [extended `test`](https://nullvoxpopuli.github.io/ember-vitest/guide/extended-test)
 
 The [test report](https://nullvoxpopuli.github.io/ember-vitest/tests/) of this repository has the result and the trace of each test.

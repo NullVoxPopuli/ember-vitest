@@ -1,7 +1,18 @@
 # `setupRenderingContext`
 
-`setupRenderingContext` returns a context with an element, an owner, and helpers that render into that element.
-Use it when a test renders more than once, or when a component needs services from your app.
+`setupRenderingContext` sets up an `@ember/test-helpers` test context around a new element.
+It returns a context with that element, an owner, and helpers that render into the element.
+
+## Why choose it
+
+Choose `setupRenderingContext` over [`render`](./render) for these reasons:
+
+- The `@ember/test-helpers` helpers accept selector strings, for example `click("button")`. With `render`, these helpers accept only elements, because no test context exists.
+- Test helpers that libraries build on `@ember/test-helpers` can find the rendered content. `@ember/test-helpers` does not depend on a test framework, so these library helpers work in vitest too.
+- The owner comes from your app class, so components get the services of your app. With `render`, you build the owner yourself.
+
+Use `ctx.render` to render. The `render` function from `@ember/test-helpers` does not work here.
+If a test needs it, or needs `visit`, use the [extended `test`](./extended-test).
 
 ::: tip
 These examples use [`expect.soft`](https://vitest.dev/api/expect.html#soft).
@@ -29,7 +40,7 @@ describe("example", () => {
 
 ## Interactions
 
-Interactions go through vitest's [`userEvent`](https://vitest.dev/api/browser/interactivity), so they use the real browser and show in the [trace view](./debugging#trace-view).
+Interactions with `ctx.click` go through vitest's [`userEvent`](https://vitest.dev/api/browser/interactivity), so they use the real browser and show in the [trace view](./debugging#trace-view).
 `ctx.click` waits for Ember to settle after the click, so you can assert on the next line.
 
 ```gjs
@@ -73,6 +84,17 @@ The locators work with [`expect.element`](https://vitest.dev/api/browser/asserti
 await ctx.getByRole("button").click();
 
 await hardExpect.element(ctx.getByRole("status")).toHaveTextContent("1");
+```
+
+## `@ember/test-helpers`
+
+The `@ember/test-helpers` helpers find elements inside `ctx.element`:
+
+```gjs
+import { click, fillIn } from "@ember/test-helpers";
+
+await fillIn("input", "hello");
+await click("button");
 ```
 
 ## Services

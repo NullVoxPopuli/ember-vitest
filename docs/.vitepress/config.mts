@@ -19,15 +19,21 @@ export default defineConfig({
       {
         text: "Introduction",
         items: [
-          { text: "Ways to test", link: "/guide/" },
+          { text: "Getting started", link: "/guide/" },
           { text: "Setup", link: "/guide/setup" },
+          {
+            text: "Vanilla Vitest (Vitest without this library)",
+            link: "/guide/vanilla",
+          },
         ],
       },
       {
-        text: "Ways to test",
+        text: "Core APIs",
+        items: [{ text: "render", link: "/guide/render" }],
+      },
+      {
+        text: "Additional testing styles",
         items: [
-          { text: "Vanilla vitest", link: "/guide/vanilla" },
-          { text: "render", link: "/guide/render" },
           {
             text: "setupRenderingContext",
             link: "/guide/setup-rendering-context",
