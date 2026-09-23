@@ -1,12 +1,12 @@
 import Application from "ember-strict-application-resolver";
 import type EmberApplication from "@ember/application";
 
-class App extends Application {
+export class DefaultApp extends Application {
   modules = {};
 }
 
 export function createApp(element: HTMLElement) {
-  return App.create({ autoboot: false, rootElement: element });
+  return DefaultApp.create({ autoboot: false, rootElement: element });
 }
 
 export function create(
