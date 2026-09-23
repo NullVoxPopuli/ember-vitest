@@ -1,5 +1,35 @@
 # Changelog
 
+## Release (2026-09-23)
+
+* ember-vitest 0.8.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-vitest`
+  * [#69](https://github.com/NullVoxPopuli/ember-vitest/pull/69) Support concurrent tests in render and visit with the test context ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#65](https://github.com/NullVoxPopuli/ember-vitest/pull/65) Add a standalone visit for application tests ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#60](https://github.com/NullVoxPopuli/ember-vitest/pull/60) Add a standalone render that returns locator selectors ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### :bug: Bug Fix
+* `ember-vitest`
+  * [#66](https://github.com/NullVoxPopuli/ember-vitest/pull/66) Fix setupContext owner and list every testing style in the nav ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### :memo: Documentation
+* `ember-vitest`
+  * [#69](https://github.com/NullVoxPopuli/ember-vitest/pull/69) Support concurrent tests in render and visit with the test context ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#70](https://github.com/NullVoxPopuli/ember-vitest/pull/70) Rename the vanilla sidebar entry to "without this library..." ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#68](https://github.com/NullVoxPopuli/ember-vitest/pull/68) Group the setup contexts under their own nav heading ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#67](https://github.com/NullVoxPopuli/ember-vitest/pull/67) Move the expect.soft tip to Getting started ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#66](https://github.com/NullVoxPopuli/ember-vitest/pull/66) Fix setupContext owner and list every testing style in the nav ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#64](https://github.com/NullVoxPopuli/ember-vitest/pull/64) Warn that render is not compatible with @ember/test-helpers ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#63](https://github.com/NullVoxPopuli/ember-vitest/pull/63) Use the Ember brand colors in the docs theme ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#62](https://github.com/NullVoxPopuli/ember-vitest/pull/62) Group the docs into core APIs and additional testing styles ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#61](https://github.com/NullVoxPopuli/ember-vitest/pull/61) Move the docs to a VitePress site on GitHub Pages ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#58](https://github.com/NullVoxPopuli/ember-vitest/pull/58) Show vanilla vitest examples first in the README ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 1
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
 ## Release (2026-09-22)
 
 * ember-vitest 0.7.0 (minor)
