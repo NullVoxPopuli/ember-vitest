@@ -37,10 +37,16 @@ export default defineConfig({
       {
         text: "Additional testing styles",
         items: [
-          { text: "setupContext", link: "/guide/setup-context" },
           {
-            text: "setupRenderingContext",
-            link: "/guide/setup-rendering-context",
+            text: "Setup contexts",
+            link: "/guide/setup-contexts",
+            items: [
+              { text: "setupContext", link: "/guide/setup-context" },
+              {
+                text: "setupRenderingContext",
+                link: "/guide/setup-rendering-context",
+              },
+            ],
           },
           {
             text: "Extended test",
