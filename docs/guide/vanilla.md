@@ -1,4 +1,4 @@
-# Vanilla vitest
+# Vanilla Vitest (Vitest without this library)
 
 You do not need anything from ember-vitest to render a component in a vitest browser test.
 You create an element, pass it to each helper, and clean it up at the end of the test.

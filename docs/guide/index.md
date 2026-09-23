@@ -1,4 +1,4 @@
-# Ways to test
+# Getting started
 
 ```bash
 npm add --save-dev ember-vitest vitest @vitest/browser @vitest/browser-webdriverio
@@ -6,15 +6,30 @@ npm add --save-dev ember-vitest vitest @vitest/browser @vitest/browser-webdriver
 
 Then configure vite. See [Setup](./setup).
 
-ember-vitest supports four ways to write a test.
-Each way removes more boilerplate than the one before it.
+## Write a test
 
-| Way                                                  | What you write                                           | Use it when                                                    |
-| ---------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------- |
-| [Vanilla vitest](./vanilla)                          | The element, the render, and the cleanup                 | You want no abstraction, or you want to see what the others do |
-| [`render`](./render)                                 | One call that returns locators                           | You test components                                            |
-| [`setupRenderingContext`](./setup-rendering-context) | A context with `render`, `click`, `find`, and an `owner` | You render more than once in a test, or you need an app owner  |
-| [Extended `test`](./extended-test)                   | A test function that sets up the app for you             | You visit routes, or you use the `@ember/test-helpers` globals |
+Use [`render`](./render) to render a component and get locators for it:
+
+```gjs
+import { describe, expect, test } from "vitest";
+import { render } from "ember-vitest";
+
+import { Button } from "#src/components/ui/button.gts";
+
+describe("Button", () => {
+  test("forwards native disabled behavior", async () => {
+    const screen = await render(
+      <template>
+        <Button disabled>Unavailable</Button>
+      </template>,
+    );
+
+    await expect
+      .element(screen.getByRole("button", { name: "Unavailable" }))
+      .toBeDisabled();
+  });
+});
+```
 
 ## Run the tests
 
@@ -23,3 +38,9 @@ pnpm vitest
 # or
 npm exec vitest
 ```
+
+## Where to go next
+
+- [Vanilla Vitest](./vanilla) shows a test without this library, so you can see what `render` does for you.
+- [Core APIs](./render) are the APIs that most tests need.
+- [Additional testing styles](./setup-rendering-context) integrate with `@ember/test-helpers` and with the owner of your app.

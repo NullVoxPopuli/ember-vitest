@@ -1,7 +1,16 @@
 # Extended `test`
 
-`applicationTest`, `renderingTest`, and `test` set up the app before each test.
-The global helpers from `@ember/test-helpers`, such as `visit` and `render`, then work as they do in QUnit.
+`applicationTest`, `renderingTest`, and `test` set up your app and an `@ember/test-helpers` context before each test.
+They match `setupApplicationTest`, `setupRenderingTest`, and `setupTest` from QUnit.
+
+## Why choose it
+
+Choose the extended `test` over [`render`](./render) and [`setupRenderingContext`](./setup-rendering-context) for these reasons:
+
+- All of `@ember/test-helpers` works, including `render`, `visit`, and `currentURL`.
+- Application tests boot your app with its router, so you can test routes and user flows.
+- Test helpers that libraries build on `@ember/test-helpers` work as they do in QUnit. `@ember/test-helpers` does not depend on a test framework, so a library does not need a vitest version of its helpers.
+- Tests that you move from QUnit need the fewest changes.
 
 ::: warning
 These functions are an experiment, and semver does not cover them.
