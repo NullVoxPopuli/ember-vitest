@@ -7,7 +7,7 @@ It returns a context with that element, an owner, and helpers that render into t
 
 Choose `setupRenderingContext` over [`render`](./render) for these reasons:
 
-- The `@ember/test-helpers` helpers accept selector strings, for example `click("button")`. With `render`, these helpers accept only elements, because no test context exists.
+- `@ember/test-helpers` works, for example `click("button")`. `render` is not compatible with `@ember/test-helpers`, because it sets up no test context.
 - Test helpers that libraries build on `@ember/test-helpers` can find the rendered content. `@ember/test-helpers` does not depend on a test framework, so these library helpers work in vitest too.
 - The owner comes from your app class, so components get the services of your app. With `render`, you build the owner yourself.
 

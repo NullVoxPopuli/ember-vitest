@@ -3,6 +3,11 @@
 `render` creates the element, renders the component into it, and waits for Ember to settle.
 It returns vitest [locator selectors](https://vitest.dev/api/browser/locators) scoped to that element.
 
+::: warning
+`render` is not compatible with `@ember/test-helpers`.
+For compatibility with `@ember/test-helpers`, use one of the [additional testing styles](#additional-testing-styles).
+:::
+
 ```gjs
 import { describe, expect, test } from "vitest";
 import { render } from "ember-vitest";
@@ -39,15 +44,10 @@ The returned `screen` has:
 
 The render is removed after each test.
 
-## `@ember/test-helpers`
+## Additional testing styles
 
 `render` does not set up an `@ember/test-helpers` test context.
-The helpers from `@ember/test-helpers` still work if you pass them an element:
+These testing styles set one up:
 
-```gjs
-import { fillIn } from "@ember/test-helpers";
-
-await fillIn(screen.container.querySelector("input"), "hello");
-```
-
-To pass selector strings, such as `fillIn("input", "hello")`, use [`setupRenderingContext`](./setup-rendering-context).
+- [`setupRenderingContext`](./setup-rendering-context)
+- [Extended `test`](./extended-test)
