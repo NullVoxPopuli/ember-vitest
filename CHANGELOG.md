@@ -2,6 +2,17 @@
 
 ## Release (2026-09-23)
 
+* ember-vitest 0.9.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-vitest`
+  * [#71](https://github.com/NullVoxPopuli/ember-vitest/pull/71) Add app and configure to render, and configure to visit ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 1
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+## Release (2026-09-23)
+
 * ember-vitest 0.8.0 (minor)
 
 #### :rocket: Enhancement
