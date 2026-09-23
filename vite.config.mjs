@@ -28,6 +28,7 @@ export default defineConfig({
       "ember-strict-application-resolver",
       "ember-source/@ember/component/index.js",
       "ember-source/@ember/service/index.js",
+      "ember-source/@ember/routing/route.js",
       "ember-source/@ember/template-factory/index.js",
       "ember-source/@ember/component/template-only.js",
       "ember-source/@glimmer/tracking/index.js",

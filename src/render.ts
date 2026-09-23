@@ -8,14 +8,31 @@ import {
   type LocatorSelectors,
 } from "vitest/browser";
 import { active, ensureTestId, track, type CleanupContext } from "./manual.ts";
+import {
+  bootApp,
+  type AppParameter,
+  type Booted,
+  type Configure,
+} from "./boot.ts";
 
 import type { ComponentLike } from "@glint/template";
 
 export interface RenderOptions {
   /**
    * The owner for services and other injections.
+   * Do not pass it together with `app`.
    */
   owner?: object;
+  /**
+   * The app to boot. Its instance becomes the owner.
+   */
+  app?: AppParameter;
+  /**
+   * Runs after `app` boots and before the render.
+   * Booting does not enter `ApplicationRoute`,
+   * so setup that the app does there must happen here.
+   */
+  configure?: Configure;
   /**
    * Args for the component. A tracked object keeps them reactive.
    */
@@ -51,14 +68,19 @@ export const render = vi.defineHelper(
     document.body.append(container);
     ensureTestId(container);
 
+    if (options.app && options.owner) {
+      throw new Error("Pass `app` or `owner` to `render`, not both.");
+    }
+
+    if (options.configure && !options.app) {
+      throw new Error("`configure` needs an `app` to configure.");
+    }
+
     // The `render` hooks record the trace mark.
     await runHooks("render", "start");
 
-    let result = renderComponent(component, {
-      into: container,
-      owner: options.owner,
-      args: options.args,
-    });
+    let result: ReturnType<typeof renderComponent> | undefined;
+    let booted: Booted | undefined;
 
     let rendered = {
       disposed: false,
@@ -67,13 +89,28 @@ export const render = vi.defineHelper(
 
         rendered.disposed = true;
         active.delete(rendered);
-        result.destroy();
+        result?.destroy();
+        booted?.destroy();
         await settled();
         container.remove();
       },
     };
 
     track(rendered, options.context);
+
+    let owner = options.owner;
+
+    if (options.app) {
+      booted = await bootApp(options.app, container);
+      await options.configure?.(booted.instance);
+      owner = booted.instance;
+    }
+
+    result = renderComponent(component, {
+      into: container,
+      owner,
+      args: options.args,
+    });
 
     await settled();
     await runHooks("render", "end");

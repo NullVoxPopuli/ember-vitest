@@ -29,7 +29,22 @@ describe("Home", () => {
 ```
 
 The app uses `location: "none"`, so the URL of the test page does not change.
-Each call to `visit` boots a separate app, so one test can boot more than one app.
+
+::: warning
+Each call to `visit` boots a new app. A second `visit(App, url)` does not navigate the first app.
+To navigate, use `screen.visit(url)`.
+:::
+
+`configure` runs after the app boots and before it visits the URL.
+`ApplicationRoute` runs after `configure`, so `configure` can register stubs that the route uses:
+
+```gjs
+const screen = await visit(App, "/", {
+  configure(instance) {
+    instance.register("service:session", StubSession);
+  },
+});
+```
 
 The returned `screen` has:
 

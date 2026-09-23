@@ -7,12 +7,18 @@ import {
   type LocatorSelectors,
 } from "vitest/browser";
 import { active, ensureTestId, track, type CleanupContext } from "./manual.ts";
+import { bootApp, type Booted, type Configure } from "./boot.ts";
 
 import type EmberApplication from "@ember/application";
 import type ApplicationInstance from "@ember/application/instance";
 import type RouterService from "@ember/routing/router-service";
 
 export interface VisitOptions {
+  /**
+   * Runs after the app boots and before it visits the URL.
+   * For example, register a stub service here.
+   */
+  configure?: Configure;
   /**
    * The vitest test context.
    * Concurrent tests must pass it, so that the app is torn down
@@ -60,31 +66,30 @@ export const visit = vi.defineHelper(
     // The `visit` hooks record the trace mark.
     await runHooks("visit", "start", url);
 
-    let app = App.create({ autoboot: false, rootElement: container });
+    let booted: Booted | undefined;
 
-    let booted = {
-      instance: undefined as ApplicationInstance | undefined,
+    let visited = {
       disposed: false,
       async [Symbol.asyncDispose]() {
-        if (booted.disposed) return;
+        if (visited.disposed) return;
 
-        booted.disposed = true;
-        active.delete(booted);
-        booted.instance?.destroy();
-        app.destroy();
+        visited.disposed = true;
+        active.delete(visited);
+        booted?.destroy();
         await settled();
         container.remove();
       },
     };
 
-    track(booted, options.context);
+    track(visited, options.context);
 
     // `location: "none"` keeps the app from changing the URL of the test page.
-    let instance = (await app.visit(url, {
-      location: "none",
-    })) as ApplicationInstance;
+    booted = await bootApp(App, container, { location: "none" });
 
-    booted.instance = instance;
+    let instance = booted.instance;
+
+    await options.configure?.(instance);
+    await instance.visit(url);
 
     await settled();
     await runHooks("visit", "end", url);
@@ -105,7 +110,7 @@ export const visit = vi.defineHelper(
         await settled();
         await runHooks("visit", "end", next);
       }),
-      unmount: () => booted[Symbol.asyncDispose](),
+      unmount: () => visited[Symbol.asyncDispose](),
     };
   },
 );

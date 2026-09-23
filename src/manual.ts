@@ -14,7 +14,8 @@ import {
   type Locator,
   type LocatorSelectors,
 } from "vitest/browser";
-import { create } from "./create-app.ts";
+import { create, DefaultApp } from "./create-app.ts";
+import { bootApp } from "./boot.ts";
 import { runHooksWithoutMark } from "./trace-marks.ts";
 
 import type EmberApplication from "@ember/application";
@@ -87,21 +88,14 @@ export async function setupContext(
   let element = document.createElement("div");
   document.body.append(element);
 
-  let application = create(app, element);
-
-  await application.boot();
-
-  let instance = application.buildInstance();
-
-  await instance.boot();
+  let booted = await bootApp(app ?? DefaultApp, element);
 
   let context: Context = {
     element,
-    owner: instance,
+    owner: booted.instance,
     async [Symbol.asyncDispose]() {
       active.delete(context);
-      instance.destroy();
-      application.destroy();
+      booted.destroy();
       await settled();
       element.remove();
     },

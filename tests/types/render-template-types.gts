@@ -62,6 +62,22 @@ async function withTestContext(context: TestContext) {
   await visit(Application, "/", { context });
 }
 
+// `app` and `configure` match the ember-storybook parameters.
+async function withApp() {
+  await render(Counter, {
+    app: Application,
+    configure(instance) {
+      instance.lookup("service:router");
+    },
+  });
+  await render(Counter, { app: () => Application });
+  await visit(Application, "/", {
+    async configure(instance) {
+      await instance.boot();
+    },
+  });
+}
+
 // Suppress "declared but never read" for the helpers; they exist solely so
 // ember-tsc can typecheck the bodies above.
 export {
@@ -71,4 +87,5 @@ export {
   standaloneRender,
   standaloneVisit,
   withTestContext,
+  withApp,
 };

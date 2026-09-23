@@ -12,3 +12,4 @@ export type { RenderOptions, RenderResult } from "./render.ts";
 
 export { visit } from "./visit.ts";
 export type { VisitOptions, VisitResult } from "./visit.ts";
+export type { AppParameter, Configure } from "./boot.ts";
