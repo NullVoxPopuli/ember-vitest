@@ -14,10 +14,7 @@ Choose `setupRenderingContext` over [`render`](./render) for these reasons:
 Use `ctx.render` to render. The `render` function from `@ember/test-helpers` does not work here.
 If a test needs it, or needs `visit`, use the [extended `test`](./extended-test).
 
-::: tip
-These examples use [`expect.soft`](https://vitest.dev/api/expect.html#soft).
-When a test fails, you see all of the failed assertions at once, not only the first one.
-:::
+These examples use `expect.soft`. See the tip in [Write a test](./#write-a-test).
 
 ## Rendering
 

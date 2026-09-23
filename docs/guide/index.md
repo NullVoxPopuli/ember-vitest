@@ -31,6 +31,18 @@ describe("Button", () => {
 });
 ```
 
+::: tip
+Use [`expect.soft`](https://vitest.dev/api/expect.html#soft) to see all of the failed assertions of a test at once, not only the first one:
+
+```js
+import { expect as hardExpect } from "vitest";
+
+const expect = hardExpect.soft;
+```
+
+`expect.soft` has no `element`, so use `hardExpect.element` for locators.
+:::
+
 ## Run the tests
 
 ```bash
