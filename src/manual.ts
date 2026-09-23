@@ -36,7 +36,7 @@ export interface RenderingContext extends LocatorSelectors {
 
 type Disposable = { [Symbol.asyncDispose]: () => Promise<void> };
 
-let active = new Set<Disposable>();
+export const active = new Set<Disposable>();
 
 // Tears down any context a test forgot to dispose.
 async function cleanup() {
@@ -74,7 +74,7 @@ let elementCount = 0;
 
 // Locators serialize an element as a CSS selector.
 // A test id keeps that selector stable across re-renders.
-function ensureTestId(element: HTMLElement) {
+export function ensureTestId(element: HTMLElement) {
   let attribute = server.config.browser.locators.testIdAttribute;
 
   if (!element.hasAttribute(attribute)) {

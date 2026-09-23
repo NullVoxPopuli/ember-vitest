@@ -5,3 +5,6 @@ export {
 } from "./extended-test-context.ts";
 
 export { setupContext, setupRenderingContext } from "./manual.ts";
+
+export { render } from "./render.ts";
+export type { RenderOptions, RenderResult } from "./render.ts";
