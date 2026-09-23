@@ -5,10 +5,9 @@ They match `setupApplicationTest`, `setupRenderingTest`, and `setupTest` from QU
 
 ## Why choose it
 
-Choose the extended `test` over [`render`](./render) and [`setupRenderingContext`](./setup-rendering-context) for these reasons:
+Choose the extended `test` over [`render`](./render), [`visit`](./visit), and [`setupRenderingContext`](./setup-rendering-context) for these reasons:
 
 - All of `@ember/test-helpers` works, including `render`, `visit`, and `currentURL`.
-- Application tests boot your app with its router, so you can test routes and user flows.
 - Test helpers that libraries build on `@ember/test-helpers` work as they do in QUnit. `@ember/test-helpers` does not depend on a test framework, so a library does not need a vitest version of its helpers.
 - Tests that you move from QUnit need the fewest changes.
 
